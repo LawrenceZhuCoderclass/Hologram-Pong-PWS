@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Player_2
   - Player_1
+  - sidewall
+  - scorewall
+  - up_down_wall
   layers:
   - Default
   - TransparentFX

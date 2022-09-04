@@ -1,11 +1,11 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class movement : MonoBehaviour
 {
     private Rigidbody rb;
-    public float speed;
+    private float speed = 3.0f;
     private Vector3 move;
     private float x;
     private float y;
@@ -31,18 +31,35 @@ public class movement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-
         rb.velocity = move * speed;
     }
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "scorewall")
+        Debug.Log("collision is happening");
+        switch (collision.gameObject.tag)
         {
-            Debug.Log("this code is for later");
+            case ("scorewall"):
+                Debug.Log("this is for the score system");
+                break;
+            case ("sidewall"):
+                x = x * -1.0f;
+                Debug.Log("this is the value of x" + x);
+                move = new Vector3 (x, y, z);                
+                break;
+
+            case ("up_down_wall"):
+                y = y * -1.0f;
+                Debug.Log("this is the value of y" + y);
+                move = new Vector3 (x, y, z);
+                break;
+
+            default:
+                z = z * -1.0f;
+                Debug.Log("this is the value of z" + z);
+                move = new Vector3 (x, y, z);
+                break;
         }
-        else
-        {
-            Debug.Log("collision works");
-        }
+        speed = speed + 1.0f;
+        Debug.Log("leaving the collision");
     }
 }
