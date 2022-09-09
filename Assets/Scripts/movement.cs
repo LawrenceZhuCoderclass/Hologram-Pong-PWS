@@ -10,6 +10,8 @@ public class movement : MonoBehaviour
     private float x;
     private float y;
     private float z;
+    public GameObject ball;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +42,11 @@ public class movement : MonoBehaviour
         {
             case ("scorewall"):
                 Debug.Log("this is for the score system");
+                //change the score here
+                ball.GetComponent<Transform>().position = new Vector3(0.67f, -0.39f, 0.72f);
+                speed = 3.0f;
+                // Destroy(ball);
+                // Instantiate(ball);
                 break;
             case ("sidewall"):
                 x = x * -1.0f;
@@ -57,9 +64,10 @@ public class movement : MonoBehaviour
                 z = z * -1.0f;
                 Debug.Log("this is the value of z" + z);
                 move = new Vector3 (x, y, z);
+                speed = speed + 0.5f; 
                 break;
         }
-        speed = speed + 1.0f;
+        
         Debug.Log("leaving the collision");
     }
 }
