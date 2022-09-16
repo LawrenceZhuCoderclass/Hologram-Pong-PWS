@@ -9,6 +9,8 @@ TagManager:
   - sidewall
   - scorewall
   - up_down_wall
+  - scorewall_p1
+  - scorewall_p2
   layers:
   - Default
   - TransparentFX

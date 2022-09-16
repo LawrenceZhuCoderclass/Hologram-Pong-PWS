@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class movement : MonoBehaviour
 {
@@ -11,11 +13,21 @@ public class movement : MonoBehaviour
     private float y;
     private float z;
     public GameObject ball;
+    public TextMeshProUGUI Scoretext_P1;
+    public TextMeshProUGUI ScoreText_P2;
+    private int[] counter = new int[2];
 
-    // Start is called before the first frame update
-    void Start()
+
+    void UpdateScore(TextMeshProUGUI text, int player)
     {
-        rb = GetComponent<Rigidbody>();
+        //score update here
+        counter[player] += 1;
+        text.text = counter[player].ToString();
+    }
+
+    void ResetMovement()
+    {
+        ball.GetComponent<Transform>().position = new Vector3(0.67f, -0.39f, 0.72f);
         x = Random.Range(-1.0f, 1.0f);
         y = Random.Range(-1.0f, 1.0f);
         if (Random.value > 0.5f)
@@ -27,42 +39,43 @@ public class movement : MonoBehaviour
             z = -1.0f; 
         }
         move = new Vector3 (x, y, z);
-        Debug.Log(move);
+        speed = 3.0f;
     }
-
-    // Update is called once per frame
+    void Start()
+    {
+        rb = ball.GetComponent<Rigidbody>();
+        ResetMovement();
+    }
     void FixedUpdate()
     {
         rb.velocity = move * speed;
     }
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("collision is happening");
         switch (collision.gameObject.tag)
         {
-            case ("scorewall"):
-                Debug.Log("this is for the score system");
-                //change the score here
-                ball.GetComponent<Transform>().position = new Vector3(0.67f, -0.39f, 0.72f);
-                speed = 3.0f;
-                // Destroy(ball);
-                // Instantiate(ball);
+            case ("scorewall_p1"):
+                UpdateScore(Scoretext_P1, 0);
+                ResetMovement();
                 break;
+            case ("scorewall_p2"):
+                Debug.Log("player 2 scored!!!");
+                UpdateScore(ScoreText_P2, 1);
+                ResetMovement();
+                break;
+
             case ("sidewall"):
                 x = x * -1.0f;
-                Debug.Log("this is the value of x" + x);
                 move = new Vector3 (x, y, z);                
                 break;
 
             case ("up_down_wall"):
                 y = y * -1.0f;
-                Debug.Log("this is the value of y" + y);
                 move = new Vector3 (x, y, z);
                 break;
 
             default:
                 z = z * -1.0f;
-                Debug.Log("this is the value of z" + z);
                 move = new Vector3 (x, y, z);
                 speed = speed + 0.5f; 
                 break;
@@ -71,3 +84,4 @@ public class movement : MonoBehaviour
         Debug.Log("leaving the collision");
     }
 }
+
