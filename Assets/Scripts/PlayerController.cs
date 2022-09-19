@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
         else if (Player_2 == true){
             float moveHorizontalP2 = Input.GetAxis("P2Horizontal");        
             float moveVerticalP2 = Input.GetAxis("P2Vertical");
-            Vector3 moveP2 = new Vector3(moveHorizontalP2, moveVerticalP2, 0.0f);
+            Vector3 moveP2 = new Vector3(-moveHorizontalP2, moveVerticalP2, 0.0f);
             rb.velocity = moveP2 * speed;
         }
         
