@@ -15,7 +15,7 @@ public class movement : MonoBehaviour
     public GameObject ball;
     public TextMeshProUGUI Scoretext_P1;
     public TextMeshProUGUI ScoreText_P2;
-    private int[] counter = new int[2];
+    public int[] counter = new int[2];
 
 
     void UpdateScore(TextMeshProUGUI text, int player)
@@ -25,6 +25,14 @@ public class movement : MonoBehaviour
         text.text = counter[player].ToString();
     }
 
+    public void ResetGame()
+    {
+        counter[0] = 0;
+        counter[1] = 0;
+        Scoretext_P1.text = counter[0].ToString();
+        ScoreText_P2.text = counter[1].ToString();
+        ResetMovement();
+    }
     void ResetMovement()
     {
         ball.GetComponent<Transform>().position = new Vector3(0.67f, -0.39f, 0.72f);
@@ -43,6 +51,8 @@ public class movement : MonoBehaviour
     }
     void Start()
     {
+        counter[0] = 0;
+        counter[1] = 0;
         rb = ball.GetComponent<Rigidbody>();
         ResetMovement();
     }

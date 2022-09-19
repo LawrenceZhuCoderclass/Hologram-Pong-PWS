@@ -11,6 +11,7 @@ TagManager:
   - up_down_wall
   - scorewall_p1
   - scorewall_p2
+  - Ball
   layers:
   - Default
   - TransparentFX
