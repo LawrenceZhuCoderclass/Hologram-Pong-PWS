@@ -36,7 +36,7 @@ public class movement : MonoBehaviour
     }
     void ResetMovement()
     {
-        ball.GetComponent<Transform>().position = new Vector3(0.67f, -0.39f, 0.72f);
+        ball.GetComponent<Transform>().position = new Vector3(0f, 0f, 0f);
         x = Random.Range(-1.0f, 1.0f);
         y = Random.Range(-1.0f, 1.0f);
         if (Random.value > 0.5f)
