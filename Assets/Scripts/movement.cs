@@ -8,6 +8,7 @@ public class movement : MonoBehaviour
 {
     private Rigidbody rb;
     private float speed = 3.0f;
+    public float speedMultiplier;
     private Vector3 move;
     private float x;
     private float y;
@@ -58,7 +59,7 @@ public class movement : MonoBehaviour
     }
     void FixedUpdate()
     {
-        rb.velocity = move * speed;
+        rb.velocity = move * speed * speedMultiplier;
     }
     void OnCollisionEnter(Collision collision)
     {
