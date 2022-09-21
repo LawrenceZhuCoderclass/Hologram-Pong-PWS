@@ -13,6 +13,10 @@ public class movement : MonoBehaviour
     private float x;
     private float y;
     private float z;
+    private Vector3 rotation;
+    private float xRot;
+    private float yRot;
+    private float zRot;
     public GameObject ball;
     public TextMeshProUGUI Scoretext_P1;
     public TextMeshProUGUI ScoreText_P2;
@@ -41,13 +45,17 @@ public class movement : MonoBehaviour
         y = Random.Range(-1.0f, 1.0f);
         if (Random.value > 0.5f)
         {
-            z = 1.0f;  
+            z = 1.0f;
         }
         else
         {
             z = -1.0f; 
         }
         move = new Vector3 (x, y, z);
+        xRot = Random.Range(-90.0f, 90.0f);
+        yRot = Random.Range(-90.0f, 90.0f);
+        zRot = Random.Range(-90.0f, 90.0f);
+        rotation = new Vector3 (xRot, yRot, zRot);
         speed = 3.0f;
     }
     void Start()
@@ -60,6 +68,8 @@ public class movement : MonoBehaviour
     void FixedUpdate()
     {
         rb.velocity = move * speed * speedMultiplier;
+        Quaternion deltaRotation = Quaternion.Euler(rotation * Time.fixedDeltaTime);
+        rb.MoveRotation(rb.rotation * deltaRotation);
     }
     void OnCollisionEnter(Collision collision)
     {
