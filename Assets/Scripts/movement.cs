@@ -18,6 +18,8 @@ public class movement : MonoBehaviour
     private float yRot;
     private float zRot;
     public GameObject ball;
+    public GameObject player1;
+    public GameObject player2;
     public TextMeshProUGUI Scoretext_P1;
     public TextMeshProUGUI ScoreText_P2;
     public int[] counter = new int[2];
@@ -52,10 +54,6 @@ public class movement : MonoBehaviour
             z = -1.0f; 
         }
         move = new Vector3 (x, y, z);
-        xRot = Random.Range(-90.0f, 90.0f);
-        yRot = Random.Range(-90.0f, 90.0f);
-        zRot = Random.Range(-90.0f, 90.0f);
-        rotation = new Vector3 (xRot, yRot, zRot);
         speed = 3.0f;
     }
     void Start()
@@ -68,8 +66,6 @@ public class movement : MonoBehaviour
     void FixedUpdate()
     {
         rb.velocity = move * speed * speedMultiplier;
-        Quaternion deltaRotation = Quaternion.Euler(rotation * Time.fixedDeltaTime);
-        rb.MoveRotation(rb.rotation * deltaRotation);
     }
     void OnCollisionEnter(Collision collision)
     {
@@ -93,6 +89,22 @@ public class movement : MonoBehaviour
             case ("up_down_wall"):
                 y = y * -1.0f;
                 move = new Vector3 (x, y, z);
+                break;
+
+            case ("Player_1"):
+                z = z * -1.0f;
+                x = ((rb.position.x - player1.transform.position.x) + x) / 2;
+                y = ((rb.position.x - player1.transform.position.y) + y) / 2;
+                move = new Vector3(x, y, z);
+                //speed = speed + 0.2f;
+                break;
+
+            case ("Player_2"):
+                z = z * -1.0f;
+                x = ((rb.position.x - player2.transform.position.x) + x) / 2;
+                y = ((rb.position.x - player2.transform.position.y) + y) / 2;
+                move = new Vector3(x, y, z);
+                //speed = speed + 0.2f;
                 break;
 
             default:

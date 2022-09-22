@@ -3117,6 +3117,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedMultiplier: 1.25
   ball: {fileID: 1109503679}
+  player1: {fileID: 1219713044}
+  player2: {fileID: 1229934767}
   Scoretext_P1: {fileID: 1687292090}
   ScoreText_P2: {fileID: 2095539202}
   counter: 0000000000000000
@@ -3134,7 +3136,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!135 &1109503682
 SphereCollider:
