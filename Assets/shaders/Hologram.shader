@@ -12,7 +12,8 @@
 		_GlowIntensity ("Glow Intensity", Range(0.01, 1.0)) = 0.5
 		// Glitch
 		_GlitchSpeed ("Glitch Speed", Range(0, 50)) = 50.0
-		_GlitchIntensity ("Glitch Intensity", Range(0.0, 0.1)) = 0
+		//_GlitchIntensity ("Glitch Intensity", Range(0.0, 0.1)) = 0
+		_GlitchIntensity ("Glitch Intensity", Range(0.0, 1)) = 0
 	}
 
 	SubShader
@@ -56,6 +57,7 @@
 
 					//Glitch
 					IN.vertex.z += sin(_Time.y * _GlitchSpeed * 5 * IN.vertex.y) * _GlitchIntensity;
+					IN.vertex.x += sin(_Time.y * _GlitchSpeed * 5 * IN.vertex.y) * _GlitchIntensity;
 
 					OUT.position = UnityObjectToClipPos(IN.vertex);
 					OUT.uv = TRANSFORM_TEX(IN.uv, _MainTex);

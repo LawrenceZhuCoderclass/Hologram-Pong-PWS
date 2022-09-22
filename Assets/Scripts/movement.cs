@@ -13,7 +13,13 @@ public class movement : MonoBehaviour
     private float x;
     private float y;
     private float z;
+    private Vector3 rotation;
+    private float xRot;
+    private float yRot;
+    private float zRot;
     public GameObject ball;
+    public GameObject player1;
+    public GameObject player2;
     public TextMeshProUGUI Scoretext_P1;
     public TextMeshProUGUI ScoreText_P2;
     public int[] counter = new int[2];
@@ -36,12 +42,12 @@ public class movement : MonoBehaviour
     }
     void ResetMovement()
     {
-        ball.GetComponent<Transform>().position = new Vector3(0.67f, -0.39f, 0.72f);
+        ball.GetComponent<Transform>().position = new Vector3(0f, 0f, 0f);
         x = Random.Range(-1.0f, 1.0f);
         y = Random.Range(-1.0f, 1.0f);
         if (Random.value > 0.5f)
         {
-            z = 1.0f;  
+            z = 1.0f;
         }
         else
         {
@@ -83,6 +89,22 @@ public class movement : MonoBehaviour
             case ("up_down_wall"):
                 y = y * -1.0f;
                 move = new Vector3 (x, y, z);
+                break;
+
+            case ("Player_1"):
+                z = z * -1.0f;
+                x = ((rb.position.x - player1.transform.position.x) + x) / 2;
+                y = ((rb.position.x - player1.transform.position.y) + y) / 2;
+                move = new Vector3(x, y, z);
+                //speed = speed + 0.2f;
+                break;
+
+            case ("Player_2"):
+                z = z * -1.0f;
+                x = ((rb.position.x - player2.transform.position.x) + x) / 2;
+                y = ((rb.position.x - player2.transform.position.y) + y) / 2;
+                move = new Vector3(x, y, z);
+                //speed = speed + 0.2f;
                 break;
 
             default:
