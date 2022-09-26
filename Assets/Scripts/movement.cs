@@ -4,6 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+public static class StringExtensions
+{
+    public static string AddColor(this string text, Color col) => $"<color={ColorHexFromUnityColor(col)}>{text}</color>";
+    public static string ColorHexFromUnityColor(this Color unityColor) => $"#{ColorUtility.ToHtmlStringRGBA(unityColor)}";
+}
+
 public class movement : MonoBehaviour
 {
     private Rigidbody rb;
@@ -20,6 +26,7 @@ public class movement : MonoBehaviour
     public GameObject ball;
     public GameObject player1;
     public GameObject player2;
+    public TextMeshPro ScoreText;
     public TextMeshProUGUI Scoretext_P1;
     public TextMeshProUGUI ScoreText_P2;
     public int[] counter = new int[2];
@@ -29,15 +36,23 @@ public class movement : MonoBehaviour
     {
         //score update here
         counter[player] += 1;
-        text.text = counter[player].ToString();
+        //text.text = counter[player].ToString();
+        ScoreText.SetText($"" +
+            $"{counter[1].ToString().AddColor(Color.green)}" +
+            $"{"-".AddColor(Color.cyan)}" +
+            $"{counter[0].ToString().AddColor(Color.magenta)}");
     }
 
     public void ResetGame()
     {
         counter[0] = 0;
         counter[1] = 0;
-        Scoretext_P1.text = counter[0].ToString();
-        ScoreText_P2.text = counter[1].ToString();
+        //Scoretext_P1.text = counter[0].ToString();
+        //ScoreText_P2.text = counter[1].ToString();
+        ScoreText.SetText($"" +
+            $"{counter[1].ToString().AddColor(Color.green)}" +
+            $"{"-".AddColor(Color.cyan)}" +
+            $"{counter[0].ToString().AddColor(Color.magenta)}");
         ResetMovement();
     }
     void ResetMovement()
@@ -58,10 +73,11 @@ public class movement : MonoBehaviour
     }
     void Start()
     {
-        counter[0] = 0;
-        counter[1] = 0;
+        //counter[0] = 0;
+        //counter[1] = 0;
         rb = ball.GetComponent<Rigidbody>();
-        ResetMovement();
+        //ResetMovement();
+        ResetGame();
     }
     void FixedUpdate()
     {
@@ -96,7 +112,7 @@ public class movement : MonoBehaviour
                 x = ((rb.position.x - player1.transform.position.x) + x) / 2;
                 y = ((rb.position.x - player1.transform.position.y) + y) / 2;
                 move = new Vector3(x, y, z);
-                //speed = speed + 0.2f;
+                speed = speed + 0.2f;
                 break;
 
             case ("Player_2"):
@@ -104,7 +120,7 @@ public class movement : MonoBehaviour
                 x = ((rb.position.x - player2.transform.position.x) + x) / 2;
                 y = ((rb.position.x - player2.transform.position.y) + y) / 2;
                 move = new Vector3(x, y, z);
-                //speed = speed + 0.2f;
+                speed = speed + 0.2f;
                 break;
 
             default:
