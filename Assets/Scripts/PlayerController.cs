@@ -6,14 +6,12 @@ public class PlayerController : MonoBehaviour
 {
     public float speed;
     private Rigidbody rb;
-    private BoxCollider boxcollider;
     private bool Player_1 = false;
     private bool Player_2 = false;
     public GameObject Player;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        boxcollider = transform.GetComponent<BoxCollider>();
         if (Player.tag == "Player_1"){
             Player_1 = true;
         }

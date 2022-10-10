@@ -30,6 +30,7 @@ public class movement : MonoBehaviour
     public TextMeshProUGUI Scoretext_P1;
     public TextMeshProUGUI ScoreText_P2;
     public int[] counter = new int[2];
+    public cameraRotator rotateCameraScript;
 
 
     void UpdateScore(TextMeshProUGUI text, int player)
@@ -82,6 +83,14 @@ public class movement : MonoBehaviour
     void FixedUpdate()
     {
         rb.velocity = move * speed * speedMultiplier;
+        if (rb.velocity.z < 0)
+        {
+            rotateCameraScript.player1 = true;
+        }
+        else if (rb.velocity.z > 0)
+        {
+            rotateCameraScript.player1 = false;
+        }
     }
     void OnCollisionEnter(Collision collision)
     {
@@ -92,7 +101,6 @@ public class movement : MonoBehaviour
                 ResetMovement();
                 break;
             case ("scorewall_p2"):
-                Debug.Log("player 2 scored!!!");
                 UpdateScore(ScoreText_P2, 1);
                 ResetMovement();
                 break;
@@ -113,6 +121,9 @@ public class movement : MonoBehaviour
                 y = ((rb.position.x - player1.transform.position.y) + y) / 2;
                 move = new Vector3(x, y, z);
                 speed = speed + 0.2f;
+                Debug.Log("player 1 hit");
+                rotateCameraScript.player1 = false;
+                Debug.Log("player 1 hit test");
                 break;
 
             case ("Player_2"):
@@ -121,6 +132,9 @@ public class movement : MonoBehaviour
                 y = ((rb.position.x - player2.transform.position.y) + y) / 2;
                 move = new Vector3(x, y, z);
                 speed = speed + 0.2f;
+                Debug.Log("player 2 hit");
+                rotateCameraScript.player1 = true;
+                Debug.Log("Player 2 hit test");
                 break;
 
             default:

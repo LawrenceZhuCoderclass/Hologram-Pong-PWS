@@ -57,6 +57,7 @@
     <Compile Include="Assets\Scripts\GlitchControl.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Score.cs" />
+    <Compile Include="Assets\Scripts\cameraRotator.cs" />
     <Compile Include="Assets\Scripts\gridFollowBall.cs" />
     <Compile Include="Assets\Scripts\movement.cs" />
   </ItemGroup>
