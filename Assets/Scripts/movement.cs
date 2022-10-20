@@ -31,6 +31,7 @@ public class movement : MonoBehaviour
     public TextMeshProUGUI ScoreText_P2;
     public int[] counter = new int[2];
     public cameraRotator rotateCameraScript;
+    public int winner;
 
 
     void UpdateScore(TextMeshProUGUI text, int player)
@@ -38,39 +39,60 @@ public class movement : MonoBehaviour
         //score update here
         counter[player] += 1;
         //text.text = counter[player].ToString();
-        ScoreText.SetText($"" +
-            $"{counter[1].ToString().AddColor(Color.green)}" +
-            $"{"-".AddColor(Color.cyan)}" +
-            $"{counter[0].ToString().AddColor(Color.magenta)}");
+        if (winner == 0)
+        {
+            ScoreText.SetText($"" +
+                $"{counter[1].ToString().AddColor(Color.green)}" +
+                $"{"-".AddColor(Color.cyan)}" +
+                $"{counter[0].ToString().AddColor(Color.magenta)}");
+        }
+        else if (winner == 1)
+        {
+            ScoreText.SetText($"" +
+                $"{"Winner".AddColor(Color.green)}");
+        }
+        else if (winner == 2)
+        {
+            ScoreText.SetText($"" +
+                $"{"Winner".AddColor(Color.magenta)}");
+        }
     }
 
     public void ResetGame()
     {
         counter[0] = 0;
         counter[1] = 0;
+        winner = 0;
         //Scoretext_P1.text = counter[0].ToString();
         //ScoreText_P2.text = counter[1].ToString();
         ScoreText.SetText($"" +
             $"{counter[1].ToString().AddColor(Color.green)}" +
             $"{"-".AddColor(Color.cyan)}" +
             $"{counter[0].ToString().AddColor(Color.magenta)}");
+        ball.SetActive(true);
         ResetMovement();
     }
     void ResetMovement()
     {
-        ball.GetComponent<Transform>().position = new Vector3(0f, 0f, 0f);
-        x = Random.Range(-1.0f, 1.0f);
-        y = Random.Range(-1.0f, 1.0f);
-        if (Random.value > 0.5f)
+        if (winner == 0)
         {
-            z = 1.0f;
+            ball.GetComponent<Transform>().position = new Vector3(0f, 0f, 0f);
+            x = Random.Range(-1.0f, 1.0f);
+            y = Random.Range(-1.0f, 1.0f);
+            if (Random.value > 0.5f)
+            {
+                z = 1.0f;
+            }
+            else
+            {
+                z = -1.0f;
+            }
+            move = new Vector3(x, y, z);
+            speed = 3.0f;
         }
-        else
-        {
-            z = -1.0f; 
+        else {
+            ball.SetActive(false);
         }
-        move = new Vector3 (x, y, z);
-        speed = 3.0f;
     }
     void Start()
     {

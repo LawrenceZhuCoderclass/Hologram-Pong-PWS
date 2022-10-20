@@ -7,9 +7,7 @@ public class cameraRotator : MonoBehaviour
 {
     //private Rigidbody rb;
     //private Vector3 EulerAngleVelocity;
-    private float timer;
     public bool player1;
-    public Quaternion to;
     public Quaternion to1;
     public Quaternion to2;
     private float speed = 4.0f;
@@ -19,7 +17,6 @@ public class cameraRotator : MonoBehaviour
         //rb = GetComponent<Rigidbody>();
         //EulerAngleVelocity = new Vector3(0, 180, 0);
         //rotating = false;
-        timer = 0.0f;
         to1 = Quaternion.AngleAxis(180, transform.up);
         to2 = Quaternion.AngleAxis(0, transform.up);
         player1 = false;

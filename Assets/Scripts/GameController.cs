@@ -47,8 +47,20 @@ public class GameController : MonoBehaviour
                 {
                     gameState = GameState.Paused;
                 }
-                if (movement.counter[0] == 10 || movement.counter[1] == 10)
+                if (movement.counter[0] == 3)
                 {
+                    movement.winner = 2;
+                    movement.ball.SetActive(false);
+                    movement.ScoreText.SetText($"" +
+                $"{"Winner".AddColor(Color.magenta)}");
+                    gameState = GameState.End;
+                }
+                else if (movement.counter[1] == 3)
+                {
+                    movement.winner = 1;
+                    movement.ball.SetActive(false);
+                    movement.ScoreText.SetText($"" +
+                $"{"Winner".AddColor(Color.green)}");
                     gameState = GameState.End;
                 }
                 break;
@@ -68,7 +80,7 @@ public class GameController : MonoBehaviour
             
             case GameState.End:
                 Debug.Log("The game is over");
-                Time.timeScale = 0;
+                //Time.timeScale = 0;
                 if (Input.GetKeyDown("space"))
                 {
                     gameState = GameState.Playing;
