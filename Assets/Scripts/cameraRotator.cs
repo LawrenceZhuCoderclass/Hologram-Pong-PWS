@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class cameraRotator : MonoBehaviour
 {
-    //private Rigidbody rb;
-    //private Vector3 EulerAngleVelocity;
     public bool player1;
     public Quaternion to1;
     public Quaternion to2;
@@ -14,9 +12,6 @@ public class cameraRotator : MonoBehaviour
 
     private void Start()
     {
-        //rb = GetComponent<Rigidbody>();
-        //EulerAngleVelocity = new Vector3(0, 180, 0);
-        //rotating = false;
         to1 = Quaternion.AngleAxis(180, transform.up);
         to2 = Quaternion.AngleAxis(0, transform.up);
         player1 = false;
@@ -32,20 +27,5 @@ public class cameraRotator : MonoBehaviour
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, to2, speed * Time.fixedDeltaTime);
         }
-        //if (rotating)
-        //{
-        //    transform.rotation = Quaternion.Slerp(transform.rotation, to, speed * speed);
-        //    timer = timer + Time.deltaTime;
-        //}
-        //else
-        //{
-        //    timer = 0.0f;
-        //    rotating = false;
-        //}
     }
-
-    //public void RotateCamera(float y)
-    //{
-    //    EulerAngleVelocity = new Vector3(0, y, 0);
-    //}
 }

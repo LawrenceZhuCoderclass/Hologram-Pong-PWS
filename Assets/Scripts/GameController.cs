@@ -47,7 +47,7 @@ public class GameController : MonoBehaviour
                 {
                     gameState = GameState.Paused;
                 }
-                if (movement.counter[0] == 3)
+                if (movement.counter[1] == 3)
                 {
                     movement.winner = 2;
                     movement.ball.SetActive(false);
@@ -55,7 +55,7 @@ public class GameController : MonoBehaviour
                 $"{"Winner".AddColor(Color.magenta)}");
                     gameState = GameState.End;
                 }
-                else if (movement.counter[1] == 3)
+                else if (movement.counter[0] == 3)
                 {
                     movement.winner = 1;
                     movement.ball.SetActive(false);

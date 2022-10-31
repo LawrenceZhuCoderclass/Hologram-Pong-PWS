@@ -6,6 +6,7 @@ using TMPro;
 
 public static class StringExtensions
 {
+    //text color for score
     public static string AddColor(this string text, Color col) => $"<color={ColorHexFromUnityColor(col)}>{text}</color>";
     public static string ColorHexFromUnityColor(this Color unityColor) => $"#{ColorUtility.ToHtmlStringRGBA(unityColor)}";
 }
@@ -38,13 +39,13 @@ public class movement : MonoBehaviour
     {
         //score update here
         counter[player] += 1;
-        //text.text = counter[player].ToString();
+        //update the text based on who has won
         if (winner == 0)
         {
             ScoreText.SetText($"" +
-                $"{counter[1].ToString().AddColor(Color.green)}" +
+                $"{counter[0].ToString().AddColor(Color.green)}" +
                 $"{"-".AddColor(Color.cyan)}" +
-                $"{counter[0].ToString().AddColor(Color.magenta)}");
+                $"{counter[1].ToString().AddColor(Color.magenta)}");
         }
         else if (winner == 1)
         {
@@ -60,20 +61,20 @@ public class movement : MonoBehaviour
 
     public void ResetGame()
     {
+        //reset the score count and the winner
         counter[0] = 0;
         counter[1] = 0;
         winner = 0;
-        //Scoretext_P1.text = counter[0].ToString();
-        //ScoreText_P2.text = counter[1].ToString();
         ScoreText.SetText($"" +
-            $"{counter[1].ToString().AddColor(Color.green)}" +
+            $"{counter[0].ToString().AddColor(Color.green)}" +
             $"{"-".AddColor(Color.cyan)}" +
-            $"{counter[0].ToString().AddColor(Color.magenta)}");
+            $"{counter[1].ToString().AddColor(Color.magenta)}");
         ball.SetActive(true);
         ResetMovement();
     }
     void ResetMovement()
     {
+        //reset the movement of the ball
         if (winner == 0)
         {
             ball.GetComponent<Transform>().position = new Vector3(0f, 0f, 0f);
@@ -96,15 +97,13 @@ public class movement : MonoBehaviour
     }
     void Start()
     {
-        //counter[0] = 0;
-        //counter[1] = 0;
         rb = ball.GetComponent<Rigidbody>();
-        //ResetMovement();
         ResetGame();
     }
     void FixedUpdate()
     {
         rb.velocity = move * speed * speedMultiplier;
+        //decide where the camera should be for a rotating camera
         if (rb.velocity.z < 0)
         {
             rotateCameraScript.player1 = true;
@@ -118,25 +117,25 @@ public class movement : MonoBehaviour
     {
         switch (collision.gameObject.tag)
         {
+            //player scored
             case ("scorewall_p1"):
-                UpdateScore(Scoretext_P1, 0);
+                UpdateScore(Scoretext_P1, 1);
                 ResetMovement();
                 break;
             case ("scorewall_p2"):
-                UpdateScore(ScoreText_P2, 1);
+                UpdateScore(ScoreText_P2, 0);
                 ResetMovement();
                 break;
-
+            //bounce off wall
             case ("sidewall"):
                 x = x * -1.0f;
                 move = new Vector3 (x, y, z);                
                 break;
-
             case ("up_down_wall"):
                 y = y * -1.0f;
                 move = new Vector3 (x, y, z);
                 break;
-
+            //bounce off player
             case ("Player_1"):
                 z = z * -1.0f;
                 x = ((rb.position.x - player1.transform.position.x) + x) / 2;
@@ -147,7 +146,6 @@ public class movement : MonoBehaviour
                 rotateCameraScript.player1 = false;
                 Debug.Log("player 1 hit test");
                 break;
-
             case ("Player_2"):
                 z = z * -1.0f;
                 x = ((rb.position.x - player2.transform.position.x) + x) / 2;
@@ -158,14 +156,13 @@ public class movement : MonoBehaviour
                 rotateCameraScript.player1 = true;
                 Debug.Log("Player 2 hit test");
                 break;
-
+            
             default:
                 z = z * -1.0f;
                 move = new Vector3 (x, y, z);
                 speed = speed + 0.5f; 
                 break;
         }
-        
         Debug.Log("leaving the collision");
     }
 }
