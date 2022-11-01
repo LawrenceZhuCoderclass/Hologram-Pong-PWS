@@ -15,6 +15,7 @@ public class gridFollowBall : MonoBehaviour
 
     void Update()
     {
+        //make new position the ball's position
         if (zAxis)
         {
             transform.position = new Vector3(transform.position.x, transform.position.y, ballTransform.position.z);

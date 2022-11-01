@@ -15,6 +15,7 @@ public class Score : MonoBehaviour
 
     void FixedUpdate()
     {
+        //rotate the score
         Quaternion deltaRotation = Quaternion.Euler(eulerAngleVelocity * Time.fixedDeltaTime);
         rb.MoveRotation(rb.rotation * deltaRotation);
     }

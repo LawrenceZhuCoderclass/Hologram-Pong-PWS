@@ -32,10 +32,12 @@ public class GameController : MonoBehaviour
         {
             case GameState.Start:
                 Time.timeScale = 0;
+                //start game
                 if (Input.anyKey)
                 {
                     Debug.Log("a button was pressed");
                     gameState = GameState.Playing;
+                    movement.ResetGame();
                 }
                 Debug.Log("Start screen");
                 break;
@@ -43,19 +45,13 @@ public class GameController : MonoBehaviour
             case GameState.Playing:
                 Debug.Log("Playing the Game");
                 Time.timeScale = 1;
+                //pause game
                 if (Input.GetKeyDown(KeyCode.Escape))
                 {
                     gameState = GameState.Paused;
                 }
-                if (movement.counter[1] == 3)
-                {
-                    movement.winner = 2;
-                    movement.ball.SetActive(false);
-                    movement.ScoreText.SetText($"" +
-                $"{"Winner".AddColor(Color.magenta)}");
-                    gameState = GameState.End;
-                }
-                else if (movement.counter[0] == 3)
+                //check for winner
+                if (movement.counter[0] == 3)
                 {
                     movement.winner = 1;
                     movement.ball.SetActive(false);
@@ -63,24 +59,36 @@ public class GameController : MonoBehaviour
                 $"{"Winner".AddColor(Color.green)}");
                     gameState = GameState.End;
                 }
+                else if (movement.counter[1] == 3)
+                {
+                    movement.winner = 2;
+                    movement.ball.SetActive(false);
+                    movement.ScoreText.SetText($"" +
+                $"{"Winner".AddColor(Color.magenta)}");
+                    gameState = GameState.End;
+                }
                 break;
             
             case GameState.Paused:
                 Debug.Log("pausing the game");
                 Time.timeScale = 0;
+                //unpause game
                 if (Input.GetKeyDown(KeyCode.Escape))
                 {
                     gameState = GameState.Playing;
                 }
+                //restart game
                 if (Input.GetKeyDown("q"))
                 {
                     gameState = GameState.Start;
+                    movement.ResetGame();
                 }
                 break;
             
             case GameState.End:
                 Debug.Log("The game is over");
                 //Time.timeScale = 0;
+                //restart game
                 if (Input.GetKeyDown("space"))
                 {
                     gameState = GameState.Playing;

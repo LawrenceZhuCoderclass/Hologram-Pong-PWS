@@ -19,6 +19,7 @@ public class cameraRotator : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //rotate to designated place
         if (!player1)
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, to1, speed * Time.fixedDeltaTime);
