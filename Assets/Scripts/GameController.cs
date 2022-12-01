@@ -7,23 +7,23 @@ public class GameController : MonoBehaviour
 {
     private movement movement;
     private GameState gameState;
+    public GameObject Field;
+    public GameObject StartText;
+    public GameObject OptionsText;
+    public GameObject PauseText;
+    private GameObject ballObject;
     public enum GameState
     {
         Start,
         Playing,
         Paused,
+        Options,
         End
     }
 
     void Awake()
     {
-        GameObject ballObject = GameObject.FindWithTag("Ball");
-        if (ballObject != null)
-        {
-            movement = ballObject.GetComponent<movement>();
-        }
-        gameState = GameState.Start;
-        
+        //nothing here for now        
     }
 
     void Update()
@@ -31,24 +31,56 @@ public class GameController : MonoBehaviour
         switch (gameState)
         {
             case GameState.Start:
-                Time.timeScale = 0;
                 //start game
-                if (Input.anyKey)
-                {
-                    Debug.Log("a button was pressed");
+                if (Input.GetKeyDown("space"))
+                {                   
                     gameState = GameState.Playing;
+                    StartText.SetActive(false);
+                    Field.SetActive(true);
+                    SearchBall();
                     movement.ResetGame();
+                    
                 }
-                Debug.Log("Start screen");
+                else if (Input.GetKeyDown("o"))
+                {
+                    gameState = GameState.Options;
+                    StartText.SetActive(false);
+                    OptionsText.SetActive(true);
+                }
+                else if (Input.GetKeyDown("q"))
+                {
+                    gameState = GameState.End;
+                }
                 break;
             
+            case GameState.Options:
+                if (Input.GetKeyDown("h"))
+                {
+                    //controls to that of the holofil
+                }
+                else if (Input.GetKeyDown("p"))
+                {
+                    //controls to that of the pepper's cone
+                }
+                else if (Input.GetKeyDown("n"))
+                {
+                    //return to the normal controls
+                }
+                else if (Input.GetKeyDown("e"))
+                {
+                    gameState = GameState.Start;
+                    OptionsText.SetActive(false);
+                    StartText.SetActive(true);
+                }
+                break; 
             case GameState.Playing:
-                Debug.Log("Playing the Game");
                 Time.timeScale = 1;
                 //pause game
                 if (Input.GetKeyDown(KeyCode.Escape))
                 {
                     gameState = GameState.Paused;
+                    Field.SetActive(false);
+                    PauseText.SetActive(true); 
                 }
                 //check for winner
                 if (movement.counter[0] == 3)
@@ -71,11 +103,14 @@ public class GameController : MonoBehaviour
             
             case GameState.Paused:
                 Debug.Log("pausing the game");
-                Time.timeScale = 0;
+                //Time.timeScale = 0;
                 //unpause game
                 if (Input.GetKeyDown(KeyCode.Escape))
                 {
                     gameState = GameState.Playing;
+                    PauseText.SetActive(false);
+                    Field.SetActive(true);
+                    SearchBall();
                 }
                 //restart game
                 if (Input.GetKeyDown("q"))
@@ -96,5 +131,13 @@ public class GameController : MonoBehaviour
                 }
                 break;
         }
+    }
+    void SearchBall()
+    {
+        ballObject = GameObject.FindWithTag("Ball");
+        if (ballObject != null)
+        {
+            movement = ballObject.GetComponent<movement>();
+        }        
     }
 }
