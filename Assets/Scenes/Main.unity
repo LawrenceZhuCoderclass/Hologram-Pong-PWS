@@ -4686,6 +4686,10 @@ MonoBehaviour:
   StartText: {fileID: 1941423430}
   OptionsText: {fileID: 1475112909}
   PauseText: {fileID: 132701717}
+  PlayerController_1: {fileID: 1219713049}
+  PlayerController_2: {fileID: 1229934773}
+  HologramCam: {fileID: 1563325683}
+  RotatingCam: {fileID: 1571805950}
 --- !u!4 &1280770851
 Transform:
   m_ObjectHideFlags: 0
@@ -5257,7 +5261,10 @@ MonoBehaviour:
     Press "P" for Pepper''s
     cone control
 
-    Press "N" for normal controls
+    Press "c" is controllers are connected
+
+    Press "N" for normal
+    controls
 
     Press "E" to return to start'
   m_isRightToLeft: 0
@@ -5287,8 +5294,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -6670,7 +6677,7 @@ MonoBehaviour:
     Press "O" for options
 
     Press "Q" to exit
-    the game"'
+    the game'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b7c50ee184922614e8234a5a22d57bcf, type: 2}
   m_sharedMaterial: {fileID: 4222528049413680799, guid: b7c50ee184922614e8234a5a22d57bcf,

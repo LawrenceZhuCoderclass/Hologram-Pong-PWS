@@ -12,6 +12,14 @@ public class GameController : MonoBehaviour
     public GameObject OptionsText;
     public GameObject PauseText;
     private GameObject ballObject;
+    public PlayerController PlayerController_1;
+    public PlayerController PlayerController_2;
+    private bool Invert_Axis;
+    private bool Piramid;
+    private bool Controller;
+    public GameObject HologramCam;
+    public GameObject RotatingCam;
+
     public enum GameState
     {
         Start,
@@ -19,11 +27,6 @@ public class GameController : MonoBehaviour
         Paused,
         Options,
         End
-    }
-
-    void Awake()
-    {
-        //nothing here for now        
     }
 
     void Update()
@@ -39,6 +42,23 @@ public class GameController : MonoBehaviour
                     Field.SetActive(true);
                     SearchBall();
                     movement.ResetGame();
+                    if(Invert_Axis == true)
+                    {
+                        PlayerController_1.invertXAxis = true;
+                        PlayerController_2.invertXAxis = true;
+                    }
+                    if (Piramid == true)
+                    {
+                        PlayerController_1.piramide = true;
+                        PlayerController_2.piramide = true;
+                        RotatingCam.SetActive(false);
+                        HologramCam.SetActive(true);
+                    }
+                    if (Controller == true)
+                    {
+                        PlayerController_1.controllerConnected = true;
+                        PlayerController_2.controllerConnected = true;
+                    }
                     
                 }
                 else if (Input.GetKeyDown("o"))
@@ -56,15 +76,25 @@ public class GameController : MonoBehaviour
             case GameState.Options:
                 if (Input.GetKeyDown("h"))
                 {
+                    Invert_Axis = true;
                     //controls to that of the holofil
                 }
                 else if (Input.GetKeyDown("p"))
                 {
+                    Invert_Axis = true;
+                    Piramid = true;
                     //controls to that of the pepper's cone
                 }
                 else if (Input.GetKeyDown("n"))
                 {
+                    Invert_Axis = false;
+                    Piramid = false;
+                    Controller = false;
                     //return to the normal controls
+                }
+                else if (Input.GetKeyDown("c"))
+                {
+                    Controller = true;
                 }
                 else if (Input.GetKeyDown("e"))
                 {
