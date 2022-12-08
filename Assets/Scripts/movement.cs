@@ -139,7 +139,7 @@ public class movement : MonoBehaviour
             case ("Player_1"):
                 z = z * -1.0f;
                 x = ((rb.position.x - player1.transform.position.x) + x) / 2;
-                y = ((rb.position.x - player1.transform.position.y) + y) / 2;
+                y = ((rb.position.y - player1.transform.position.y) + y) / 2;
                 move = new Vector3(x, y, z);
                 speed = speed + 0.2f;
                 Debug.Log("player 1 hit");
@@ -149,7 +149,7 @@ public class movement : MonoBehaviour
             case ("Player_2"):
                 z = z * -1.0f;
                 x = ((rb.position.x - player2.transform.position.x) + x) / 2;
-                y = ((rb.position.x - player2.transform.position.y) + y) / 2;
+                y = ((rb.position.y - player2.transform.position.y) + y) / 2;
                 move = new Vector3(x, y, z);
                 speed = speed + 0.2f;
                 Debug.Log("player 2 hit");
