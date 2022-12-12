@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -349,7 +349,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 3.800003}
+  m_AnchoredPosition: {x: 0, y: 2}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &132701719
@@ -431,8 +431,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 15
+  m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4690,6 +4690,7 @@ MonoBehaviour:
   PlayerController_2: {fileID: 1229934773}
   HologramCam: {fileID: 1563325683}
   RotatingCam: {fileID: 1571805950}
+  mainCamera: {fileID: 963194225}
 --- !u!4 &1280770851
 Transform:
   m_ObjectHideFlags: 0
@@ -5204,7 +5205,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 7.92}
+  m_AnchoredPosition: {x: 0, y: 3}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1475112911
@@ -5256,17 +5257,17 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Options
 
-    Press "H" for Holofil controls
+    Press "H" for Holofil mode
 
-    Press "P" for Pepper''s
-    cone control
+    Press "P" for Pyramid mode
 
-    Press "c" is controllers are connected
+    Press
+    "C" to use controller
 
-    Press "N" for normal
-    controls
+    Press "N" for normal controls
 
-    Press "E" to return to start'
+    Press "E" to return
+    to start'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b7c50ee184922614e8234a5a22d57bcf, type: 2}
   m_sharedMaterial: {fileID: 4222528049413680799, guid: b7c50ee184922614e8234a5a22d57bcf,
@@ -5294,8 +5295,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32
-  m_fontSizeBase: 32
+  m_fontSize: 15
+  m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -6622,7 +6623,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 3.800003}
+  m_AnchoredPosition: {x: 0, y: 2}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1941423432
@@ -6676,8 +6677,7 @@ MonoBehaviour:
 
     Press "O" for options
 
-    Press "Q" to exit
-    the game'
+    Press "Q" to exit'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b7c50ee184922614e8234a5a22d57bcf, type: 2}
   m_sharedMaterial: {fileID: 4222528049413680799, guid: b7c50ee184922614e8234a5a22d57bcf,
@@ -6705,8 +6705,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

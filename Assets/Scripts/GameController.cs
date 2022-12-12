@@ -19,6 +19,7 @@ public class GameController : MonoBehaviour
     private bool Controller;
     public GameObject HologramCam;
     public GameObject RotatingCam;
+    public GameObject mainCamera;
 
     public enum GameState
     {
@@ -77,12 +78,14 @@ public class GameController : MonoBehaviour
                 if (Input.GetKeyDown("h"))
                 {
                     Invert_Axis = true;
+                    mainCamera.transform.rotation = Quaternion.Euler(mainCamera.transform.eulerAngles.x, mainCamera.transform.eulerAngles.y, 90);
                     //controls to that of the holofil
                 }
                 else if (Input.GetKeyDown("p"))
                 {
                     Invert_Axis = true;
                     Piramid = true;
+                    mainCamera.transform.rotation = Quaternion.Euler(mainCamera.transform.eulerAngles.x, mainCamera.transform.eulerAngles.y, 0);
                     //controls to that of the pepper's cone
                 }
                 else if (Input.GetKeyDown("n"))
@@ -90,6 +93,7 @@ public class GameController : MonoBehaviour
                     Invert_Axis = false;
                     Piramid = false;
                     Controller = false;
+                    mainCamera.transform.rotation = Quaternion.Euler(mainCamera.transform.eulerAngles.x, mainCamera.transform.eulerAngles.y, 0);
                     //return to the normal controls
                 }
                 else if (Input.GetKeyDown("c"))
