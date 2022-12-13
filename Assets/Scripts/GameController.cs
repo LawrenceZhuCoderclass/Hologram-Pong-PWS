@@ -14,8 +14,8 @@ public class GameController : MonoBehaviour
     private GameObject ballObject;
     public PlayerController PlayerController_1;
     public PlayerController PlayerController_2;
-    private bool Invert_Axis;
-    private bool Piramid;
+    public bool Invert_Axis;
+    public bool Piramid;
     private bool Controller;
     public GameObject HologramCam;
     public GameObject RotatingCam;
@@ -79,6 +79,7 @@ public class GameController : MonoBehaviour
                 {
                     Invert_Axis = true;
                     mainCamera.transform.rotation = Quaternion.Euler(mainCamera.transform.eulerAngles.x, mainCamera.transform.eulerAngles.y, 90);
+                    Screen.SetResolution(720, 1334, true);
                     //controls to that of the holofil
                 }
                 else if (Input.GetKeyDown("p"))
