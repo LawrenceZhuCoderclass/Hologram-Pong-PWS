@@ -33,7 +33,8 @@ public class movement : MonoBehaviour
     public int[] counter = new int[2];
     public cameraRotator rotateCameraScript;
     public int winner;
-
+    public AudioSource Bounce;
+    public AudioSource Wall;
 
     void UpdateScore(TextMeshProUGUI text, int player)
     {
@@ -129,32 +130,32 @@ public class movement : MonoBehaviour
             //bounce off wall
             case ("sidewall"):
                 x = x * -1.0f;
-                move = new Vector3 (x, y, z);                
+                move = new Vector3 (x, y, z);
+                Wall.Play();              
                 break;
             case ("up_down_wall"):
                 y = y * -1.0f;
                 move = new Vector3 (x, y, z);
+                Wall.Play();   
                 break;
             //bounce off player
             case ("Player_1"):
+                Bounce.Play();
                 z = z * -1.0f;
                 x = ((rb.position.x - player1.transform.position.x) + x) / 2;
                 y = ((rb.position.y - player1.transform.position.y) + y) / 2;
                 move = new Vector3(x, y, z);
-                speed = speed + 0.2f;
-                Debug.Log("player 1 hit");
+                speed = speed + 0.75f;
                 rotateCameraScript.player1 = false;
-                Debug.Log("player 1 hit test");
                 break;
             case ("Player_2"):
+                Bounce.Play();
                 z = z * -1.0f;
                 x = ((rb.position.x - player2.transform.position.x) + x) / 2;
                 y = ((rb.position.y - player2.transform.position.y) + y) / 2;
                 move = new Vector3(x, y, z);
-                speed = speed + 0.2f;
-                Debug.Log("player 2 hit");
+                speed = speed + 0.75f;
                 rotateCameraScript.player1 = true;
-                Debug.Log("Player 2 hit test");
                 break;
             
             default:
@@ -163,7 +164,6 @@ public class movement : MonoBehaviour
                 speed = speed + 0.5f; 
                 break;
         }
-        Debug.Log("leaving the collision");
     }
 }
 
