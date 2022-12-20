@@ -14,88 +14,38 @@ public static class StringExtensions
 public class movement : MonoBehaviour
 {
     private Rigidbody rb;
+
     private float speed = 3.0f;
     public float speedMultiplier;
-    private Vector3 move;
     private float x;
     private float y;
     private float z;
-    private Vector3 rotation;
     private float xRot;
     private float yRot;
     private float zRot;
+
+    private Vector3 move;
+
+    private Vector3 rotation;
+
     public GameObject ball;
     public GameObject player1;
     public GameObject player2;
+
     public TextMeshPro ScoreText;
+
     public TextMeshProUGUI Scoretext_P1;
     public TextMeshProUGUI ScoreText_P2;
+
     public int[] counter = new int[2];
+
     public cameraRotator rotateCameraScript;
+
     public int winner;
+
     public AudioSource Bounce;
     public AudioSource Wall;
 
-    void UpdateScore(TextMeshProUGUI text, int player)
-    {
-        //score update here
-        counter[player] += 1;
-        //update the text based on who has won
-        if (winner == 0)
-        {
-            ScoreText.SetText($"" +
-                $"{counter[0].ToString().AddColor(Color.green)}" +
-                $"{"-".AddColor(Color.cyan)}" +
-                $"{counter[1].ToString().AddColor(Color.magenta)}");
-        }
-        else if (winner == 1)
-        {
-            ScoreText.SetText($"" +
-                $"{"Winner".AddColor(Color.green)}");
-        }
-        else if (winner == 2)
-        {
-            ScoreText.SetText($"" +
-                $"{"Winner".AddColor(Color.magenta)}");
-        }
-    }
-
-    public void ResetGame()
-    {
-        //reset the score count and the winner
-        counter[0] = 0;
-        counter[1] = 0;
-        winner = 0;
-        ScoreText.SetText($"" +
-            $"{counter[0].ToString().AddColor(Color.green)}" +
-            $"{"-".AddColor(Color.cyan)}" +
-            $"{counter[1].ToString().AddColor(Color.magenta)}");
-        ball.SetActive(true);
-        ResetMovement();
-    }
-    void ResetMovement()
-    {
-        //reset the movement of the ball
-        if (winner == 0)
-        {
-            ball.GetComponent<Transform>().position = new Vector3(0f, 0f, 0f);
-            x = Random.Range(-1.0f, 1.0f);
-            y = Random.Range(-1.0f, 1.0f);
-            if (Random.value > 0.5f)
-            {
-                z = 1.0f;
-            }
-            else
-            {
-                z = -1.0f;
-            }
-            move = new Vector3(x, y, z);
-            speed = 3.0f;
-        }
-        else {
-            ball.SetActive(false);
-        }
-    }
     void Start()
     {
         rb = ball.GetComponent<Rigidbody>();
@@ -163,6 +113,67 @@ public class movement : MonoBehaviour
                 move = new Vector3 (x, y, z);
                 speed = speed + 0.5f; 
                 break;
+        }
+    }
+    
+    void UpdateScore(TextMeshProUGUI text, int player)
+    {
+        //score update here
+        counter[player] += 1;
+        //update the text based on who has won
+        if (winner == 0)
+        {
+            ScoreText.SetText($"" +
+                $"{counter[0].ToString().AddColor(Color.green)}" +
+                $"{"-".AddColor(Color.cyan)}" +
+                $"{counter[1].ToString().AddColor(Color.magenta)}");
+        }
+        else if (winner == 1)
+        {
+            ScoreText.SetText($"" +
+                $"{"Winner".AddColor(Color.green)}");
+        }
+        else if (winner == 2)
+        {
+            ScoreText.SetText($"" +
+                $"{"Winner".AddColor(Color.magenta)}");
+        }
+    }
+
+    public void ResetGame()
+    {
+        //reset the score count and the winner
+        counter[0] = 0;
+        counter[1] = 0;
+        winner = 0;
+        ScoreText.SetText($"" +
+            $"{counter[0].ToString().AddColor(Color.green)}" +
+            $"{"-".AddColor(Color.cyan)}" +
+            $"{counter[1].ToString().AddColor(Color.magenta)}");
+        ball.SetActive(true);
+        ResetMovement();
+    }
+    void ResetMovement()
+    {
+        //reset the movement of the ball
+        if (winner == 0)
+        {
+            ball.GetComponent<Transform>().position = new Vector3(0f, 0f, 0f);
+            x = Random.Range(-1.0f, 1.0f);
+            y = Random.Range(-1.0f, 1.0f);
+            if (Random.value > 0.5f)
+            {
+                z = 1.0f;
+            }
+            else
+            {
+                z = -1.0f;
+            }
+            move = new Vector3(x, y, z);
+            speed = 3.0f;
+        }
+        else {
+            ball.SetActive(false);
         }
     }
 }

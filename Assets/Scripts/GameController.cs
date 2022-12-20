@@ -6,17 +6,22 @@ using UnityEngine.UIElements;
 public class GameController : MonoBehaviour
 {
     private movement movement;
+
     private GameState gameState;
+
     public GameObject Field;
     public GameObject StartText;
     public GameObject OptionsText;
     public GameObject PauseText;
     private GameObject ballObject;
+
     public PlayerController PlayerController_1;
     public PlayerController PlayerController_2;
+
     public bool Invert_Axis;
     public bool Piramid;
     private bool Controller;
+
     public GameObject HologramCam;
     public GameObject RotatingCam;
     public GameObject mainCamera;
@@ -35,7 +40,7 @@ public class GameController : MonoBehaviour
         switch (gameState)
         {
             case GameState.Start:
-                //start game
+                //During the Start screen
                 if (Input.GetKeyDown("space"))
                 {                   
                     gameState = GameState.Playing;
@@ -75,6 +80,7 @@ public class GameController : MonoBehaviour
                 break;
             
             case GameState.Options:
+                //During the options screen
                 if (Input.GetKeyDown("h"))
                 {
                     Invert_Axis = true;
@@ -109,8 +115,8 @@ public class GameController : MonoBehaviour
                 }
                 break; 
             case GameState.Playing:
+                //Things that can be done while playing
                 Time.timeScale = 1;
-                //pause game
                 if (Input.GetKeyDown(KeyCode.Escape))
                 {
                     gameState = GameState.Paused;
@@ -137,28 +143,25 @@ public class GameController : MonoBehaviour
                 break;
             
             case GameState.Paused:
-                Debug.Log("pausing the game");
-                //Time.timeScale = 0;
-                //unpause game
+                //During the pause screen
                 if (Input.GetKeyDown(KeyCode.Escape))
                 {
+                    //unpause game
                     gameState = GameState.Playing;
                     PauseText.SetActive(false);
                     Field.SetActive(true);
                     SearchBall();
                 }
-                //restart game
                 if (Input.GetKeyDown("q"))
                 {
+                    //restart game
                     gameState = GameState.Start;
                     movement.ResetGame();
                 }
                 break;
             
             case GameState.End:
-                Debug.Log("The game is over");
-                //Time.timeScale = 0;
-                //restart game
+                //restart game after game over
                 if (Input.GetKeyDown("space"))
                 {
                     gameState = GameState.Playing;

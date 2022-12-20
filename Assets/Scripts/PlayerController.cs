@@ -5,21 +5,28 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float speed;
+
     private Rigidbody rb;
+
     private bool Player_1 = false;
     private bool Player_2 = false;
+
     public GameObject Player;
+
     float moveHorizontalP1;
     float moveVerticalP1;
     float moveHorizontalP2;
     float moveVerticalP2;
+    
     public bool controllerConnected;
     public bool invertXAxis;
     public bool piramide;
+
     private string P1Xinput;
     private string P1Yinput;
     private string P2Xinput;
     private string P2Yinput;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -66,7 +73,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         //updating player movement
