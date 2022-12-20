@@ -364,6 +364,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73f306942d635db49940c0d25853d0c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameController: {fileID: 1280770850}
+  cameraRotation: {fileID: 1571805952}
 --- !u!54 &132701720
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3077,6 +3079,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73f306942d635db49940c0d25853d0c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameController: {fileID: 1280770850}
+  cameraRotation: {fileID: 1571805952}
 --- !u!1 &993815809
 GameObject:
   m_ObjectHideFlags: 0
@@ -4893,6 +4897,8 @@ MonoBehaviour:
   PauseText: {fileID: 132701717}
   PlayerController_1: {fileID: 1219713049}
   PlayerController_2: {fileID: 1229934773}
+  Invert_Axis: 0
+  Piramid: 0
   HologramCam: {fileID: 1563325683}
   RotatingCam: {fileID: 1571805950}
   mainCamera: {fileID: 963194225}
@@ -5425,6 +5431,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73f306942d635db49940c0d25853d0c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameController: {fileID: 1280770850}
+  cameraRotation: {fileID: 1571805952}
 --- !u!54 &1475112912
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6843,6 +6851,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73f306942d635db49940c0d25853d0c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameController: {fileID: 1280770850}
+  cameraRotation: {fileID: 1571805952}
 --- !u!54 &1941423433
 Rigidbody:
   m_ObjectHideFlags: 0
