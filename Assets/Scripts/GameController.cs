@@ -26,6 +26,8 @@ public class GameController : MonoBehaviour
     public GameObject RotatingCam;
     public GameObject mainCamera;
 
+    private AudioSource WinSound;
+
     public enum GameState
     {
         Start,
@@ -33,6 +35,10 @@ public class GameController : MonoBehaviour
         Paused,
         Options,
         End
+    }
+    void Start()
+    {
+        WinSound = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -130,6 +136,7 @@ public class GameController : MonoBehaviour
                     movement.ball.SetActive(false);
                     movement.ScoreText.SetText($"" +
                 $"{"Winner".AddColor(Color.green)}");
+                    WinSound.Play();
                     gameState = GameState.End;
                 }
                 else if (movement.counter[1] == 3)
@@ -138,6 +145,7 @@ public class GameController : MonoBehaviour
                     movement.ball.SetActive(false);
                     movement.ScoreText.SetText($"" +
                 $"{"Winner".AddColor(Color.magenta)}");
+                    WinSound.Play();
                     gameState = GameState.End;
                 }
                 break;
