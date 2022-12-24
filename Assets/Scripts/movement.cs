@@ -45,6 +45,7 @@ public class movement : MonoBehaviour
 
     public AudioSource Bounce;
     public AudioSource Wall;
+    public AudioSource Score;
 
     void Start()
     {
@@ -72,10 +73,12 @@ public class movement : MonoBehaviour
             case ("scorewall_p1"):
                 UpdateScore(Scoretext_P1, 1);
                 ResetMovement();
+                Score.Play();
                 break;
             case ("scorewall_p2"):
                 UpdateScore(ScoreText_P2, 0);
                 ResetMovement();
+                Score.Play();
                 break;
             //bounce off wall
             case ("sidewall"):

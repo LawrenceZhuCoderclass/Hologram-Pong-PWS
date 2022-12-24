@@ -26,7 +26,7 @@ public class GameController : MonoBehaviour
     public GameObject RotatingCam;
     public GameObject mainCamera;
 
-    private AudioSource WinSound;
+    public AudioSource WinSound;
 
     public enum GameState
     {
@@ -38,7 +38,7 @@ public class GameController : MonoBehaviour
     }
     void Start()
     {
-        WinSound = GetComponent<AudioSource>();
+        //WinSound = GetComponent<AudioSource>();
     }
 
     void Update()
