@@ -27,6 +27,7 @@ public class GameController : MonoBehaviour
     public GameObject mainCamera;
 
     public AudioSource WinSound;
+    public AudioSource Select;
 
     public enum GameState
     {
@@ -35,10 +36,6 @@ public class GameController : MonoBehaviour
         Paused,
         Options,
         End
-    }
-    void Start()
-    {
-        //WinSound = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -75,6 +72,7 @@ public class GameController : MonoBehaviour
                 }
                 else if (Input.GetKeyDown("o"))
                 {
+                    Select.Play();
                     gameState = GameState.Options;
                     StartText.SetActive(false);
                     OptionsText.SetActive(true);
@@ -89,6 +87,7 @@ public class GameController : MonoBehaviour
                 //During the options screen
                 if (Input.GetKeyDown("h"))
                 {
+                    Select.Play();
                     Invert_Axis = true;
                     mainCamera.transform.rotation = Quaternion.Euler(mainCamera.transform.eulerAngles.x, mainCamera.transform.eulerAngles.y, 90);
                     Screen.SetResolution(720, 1334, true);
@@ -96,6 +95,7 @@ public class GameController : MonoBehaviour
                 }
                 else if (Input.GetKeyDown("p"))
                 {
+                    Select.Play();
                     Invert_Axis = true;
                     Piramid = true;
                     mainCamera.transform.rotation = Quaternion.Euler(mainCamera.transform.eulerAngles.x, mainCamera.transform.eulerAngles.y, 0);
@@ -103,6 +103,7 @@ public class GameController : MonoBehaviour
                 }
                 else if (Input.GetKeyDown("n"))
                 {
+                    Select.Play();
                     Invert_Axis = false;
                     Piramid = false;
                     Controller = false;
@@ -111,10 +112,12 @@ public class GameController : MonoBehaviour
                 }
                 else if (Input.GetKeyDown("c"))
                 {
+                    Select.Play();
                     Controller = true;
                 }
                 else if (Input.GetKeyDown("e"))
                 {
+                    Select.Play();
                     gameState = GameState.Start;
                     OptionsText.SetActive(false);
                     StartText.SetActive(true);
