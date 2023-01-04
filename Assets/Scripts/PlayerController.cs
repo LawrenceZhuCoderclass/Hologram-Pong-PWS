@@ -19,7 +19,8 @@ public class PlayerController : MonoBehaviour
     float moveVerticalP2;
     
     public bool controllerConnected;
-    public bool invertXAxis;
+    //public bool invertXAxis;
+    public float XAxismultiplier = 1.0f;
     public bool piramide;
 
     private string P1Xinput;
@@ -75,26 +76,30 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        Vector3 boundaries = transform.position;
+        boundaries.x = Mathf.Clamp(boundaries.x, -3.36f, 3.36f);
+        boundaries.y = Mathf.Clamp(boundaries.y, -1.86f, 1.86f);
+        transform.position = boundaries;
         //updating player movement
         if (Player_1 == true) {
-            moveHorizontalP1 = Input.GetAxis(P1Xinput);
-            moveVerticalP1 = Input.GetAxis(P1Yinput);
             //when reflected in screen the horizontal movement is flipped
-            if (invertXAxis)
-            {
-                moveHorizontalP1 = moveHorizontalP1 * -1;
-            }
+            moveHorizontalP1 = XAxismultiplier * Input.GetAxis(P1Xinput);
+            moveVerticalP1 = Input.GetAxis(P1Yinput);
+            //if (invertXAxis)
+            //{
+            //    moveHorizontalP1 = moveHorizontalP1 * -1;
+            //}
             Vector3 moveP1 = new Vector3(moveHorizontalP1, moveVerticalP1, 0.0f);
             rb.velocity = moveP1 * speed;
         }
         else if (Player_2 == true){
-            moveHorizontalP2 = Input.GetAxis(P2Xinput);
-            moveVerticalP2 = Input.GetAxis(P2Yinput);
             //when reflected in screen the horizontal movement is flipped
-            if (invertXAxis)
-            {
-                moveHorizontalP2 = moveHorizontalP2 * -1;
-            }
+            moveHorizontalP2 = XAxismultiplier * Input.GetAxis(P2Xinput);
+            moveVerticalP2 = Input.GetAxis(P2Yinput);
+            //if (invertXAxis)
+            //{
+            //    moveHorizontalP2 = moveHorizontalP2 * -1;
+            //}
             Vector3 moveP2 = new Vector3(-moveHorizontalP2, moveVerticalP2, 0.0f);
             rb.velocity = moveP2 * speed;
         }

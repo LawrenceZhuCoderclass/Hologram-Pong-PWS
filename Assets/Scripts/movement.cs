@@ -118,7 +118,39 @@ public class movement : MonoBehaviour
                 break;
         }
     }
-    
+
+    void OnTriggerEnter(Collider collision)
+    {
+        switch (collision.gameObject.tag)
+        {
+            //bounce off player
+            case ("Player_1"):
+                Bounce.Play();
+                z = z * -1.0f;
+                x = ((rb.position.x - player1.transform.position.x) + x) / 2;
+                y = ((rb.position.y - player1.transform.position.y) + y) / 2;
+                move = new Vector3(x, y, z);
+                speed = speed + 0.75f;
+                rotateCameraScript.player1 = false;
+                break;
+            case ("Player_2"):
+                Bounce.Play();
+                z = z * -1.0f;
+                x = ((rb.position.x - player2.transform.position.x) + x) / 2;
+                y = ((rb.position.y - player2.transform.position.y) + y) / 2;
+                move = new Vector3(x, y, z);
+                speed = speed + 0.75f;
+                rotateCameraScript.player1 = true;
+                break;
+
+            default:
+                z = z * -1.0f;
+                move = new Vector3(x, y, z);
+                speed = speed + 0.5f;
+                break;
+        }
+    }
+
     void UpdateScore(TextMeshProUGUI text, int player)
     {
         //score update here

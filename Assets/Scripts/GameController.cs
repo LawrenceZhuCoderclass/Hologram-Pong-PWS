@@ -53,8 +53,10 @@ public class GameController : MonoBehaviour
                     movement.ResetGame();
                     if(Invert_Axis == true)
                     {
-                        PlayerController_1.invertXAxis = true;
-                        PlayerController_2.invertXAxis = true;
+                        //PlayerController_1.invertXAxis = true;
+                        //PlayerController_2.invertXAxis = true;
+                        PlayerController_1.XAxismultiplier = -1.0f;
+                        PlayerController_2.XAxismultiplier = -1.0f;
                     }
                     if (Piramid == true)
                     {
