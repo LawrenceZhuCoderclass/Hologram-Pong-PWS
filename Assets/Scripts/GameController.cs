@@ -169,6 +169,9 @@ public class GameController : MonoBehaviour
                 {
                     //restart game
                     gameState = GameState.Start;
+                    StartText.SetActive(true);
+                    Field.SetActive(false);
+                    PauseText.SetActive(false);
                     movement.ResetGame();
                 }
                 break;
