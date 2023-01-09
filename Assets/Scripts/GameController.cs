@@ -81,7 +81,7 @@ public class GameController : MonoBehaviour
                 }
                 else if (Input.GetKeyDown("q"))
                 {
-                    gameState = GameState.End;
+                    Application.Quit();
                 }
                 break;
             
@@ -165,7 +165,7 @@ public class GameController : MonoBehaviour
                     Field.SetActive(true);
                     SearchBall();
                 }
-                if (Input.GetKeyDown("q"))
+                if (Input.GetKeyDown("e"))
                 {
                     //restart game
                     gameState = GameState.Start;
