@@ -13,20 +13,17 @@ public class PlayerController : MonoBehaviour
 
     public GameObject Player;
 
-    float moveHorizontalP1;
-    float moveVerticalP1;
-    float moveHorizontalP2;
-    float moveVerticalP2;
+    float moveHorizontal;
+    float moveVertical;
     
     public bool controllerConnected;
     //public bool invertXAxis;
     public float XAxismultiplier = 1.0f;
+    private float player2MovementMultiplier = 1.0f;
     public bool piramide;
 
-    private string P1Xinput;
-    private string P1Yinput;
-    private string P2Xinput;
-    private string P2Yinput;
+    private string XinputName;
+    private string YinputName;
 
     void Start()
     {
@@ -40,37 +37,52 @@ public class PlayerController : MonoBehaviour
         }
 
         //checking which settings are true for the movement input
-        if (controllerConnected && !piramide)
+        if (Player_1)
         {
-            P1Xinput = "MoveHorizontalP1";
-            P1Yinput = "MoveVerticalP1";
-
-            P2Xinput = "MoveHorizontalP2";
-            P2Yinput = "MoveVerticalP2";
+            if (controllerConnected && !piramide)
+            {
+                XinputName = "MoveHorizontalP1";
+                YinputName = "MoveVerticalP1";
+            }
+            else if (controllerConnected && piramide)
+            {
+                XinputName = "P1HorizontalCoP";
+                YinputName = "P1VerticalCoP";
+            }
+            else if (!controllerConnected && !piramide)
+            {
+                XinputName = "P1Horizontal";
+                YinputName = "P1Vertical";
+            }
+            else if (!controllerConnected && piramide)
+            {
+                XinputName = "P1HorizontalKP";
+                YinputName = "P1VerticalKP";
+            }
         }
-        else if (controllerConnected && piramide)
+        else if (Player_2)
         {
-            P1Xinput = "P1HorizontalCoP";
-            P1Yinput = "P1VerticalCoP";
-
-            P2Xinput = "P2HorizontalCoP";
-            P2Yinput = "P2VerticalCoP";
-        }
-        else if (!controllerConnected && !piramide)
-        {
-            P1Xinput = "P1Horizontal";
-            P1Yinput = "P1Vertical";
-
-            P2Xinput = "P2Horizontal";
-            P2Yinput = "P2Vertical";
-        }
-        else if (!controllerConnected && piramide)
-        {
-            P1Xinput = "P1HorizontalKP";
-            P1Yinput = "P1VerticalKP";
-
-            P2Xinput = "P2HorizontalKP";
-            P2Yinput = "P2VerticalKP";
+            player2MovementMultiplier = -1;
+            if (controllerConnected && !piramide)
+            {
+                XinputName = "MoveHorizontalP2";
+                YinputName = "MoveVerticalP2";
+            }
+            else if (controllerConnected && piramide)
+            {
+                XinputName = "P2HorizontalCoP";
+                YinputName = "P2VerticalCoP";
+            }
+            else if (!controllerConnected && !piramide)
+            {
+                XinputName = "P2Horizontal";
+                YinputName = "P2Vertical";
+            }
+            else if (!controllerConnected && piramide)
+            {
+                XinputName = "P2HorizontalKP";
+                YinputName = "P2VerticalKP";
+            }
         }
     }
 
@@ -81,27 +93,10 @@ public class PlayerController : MonoBehaviour
         boundaries.y = Mathf.Clamp(boundaries.y, -1.86f, 1.86f);
         transform.position = boundaries;
         //updating player movement
-        if (Player_1 == true) {
             //when reflected in screen the horizontal movement is flipped
-            moveHorizontalP1 = XAxismultiplier * Input.GetAxis(P1Xinput);
-            moveVerticalP1 = Input.GetAxis(P1Yinput);
-            //if (invertXAxis)
-            //{
-            //    moveHorizontalP1 = moveHorizontalP1 * -1;
-            //}
-            Vector3 moveP1 = new Vector3(moveHorizontalP1, moveVerticalP1, 0.0f);
-            rb.velocity = moveP1 * speed;
-        }
-        else if (Player_2 == true){
-            //when reflected in screen the horizontal movement is flipped
-            moveHorizontalP2 = XAxismultiplier * Input.GetAxis(P2Xinput);
-            moveVerticalP2 = Input.GetAxis(P2Yinput);
-            //if (invertXAxis)
-            //{
-            //    moveHorizontalP2 = moveHorizontalP2 * -1;
-            //}
-            Vector3 moveP2 = new Vector3(-moveHorizontalP2, moveVerticalP2, 0.0f);
-            rb.velocity = moveP2 * speed;
-        }
+            moveHorizontal = XAxismultiplier * Input.GetAxis(XinputName);
+            moveVertical = Input.GetAxis(YinputName);
+            Vector3 move = new Vector3(player2MovementMultiplier * moveHorizontal, moveVertical, 0.0f);
+            rb.velocity = move * speed;
     }
 }
