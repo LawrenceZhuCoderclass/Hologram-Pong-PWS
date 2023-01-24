@@ -5,23 +5,22 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float speed;
-
     private Rigidbody rb;
+    float moveHorizontal;
+    float moveVertical;
 
     private bool Player_1 = false;
     private bool Player_2 = false;
-
     public GameObject Player;
-
-    float moveHorizontal;
-    float moveVertical;
     
     public bool controllerConnected;
-    //public bool invertXAxis;
+    //used when projected in hologram;
     public float XAxismultiplier = 1.0f;
+    //used when the player is 2
     private float player2MovementMultiplier = 1.0f;
     public bool piramide;
 
+    //used for input settings
     private string XinputName;
     private string YinputName;
 
@@ -88,6 +87,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        //making sure the player stays withing the boundaries
         Vector3 boundaries = transform.position;
         boundaries.x = Mathf.Clamp(boundaries.x, -3.36f, 3.36f);
         boundaries.y = Mathf.Clamp(boundaries.y, -1.86f, 1.86f);

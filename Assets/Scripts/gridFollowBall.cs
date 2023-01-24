@@ -5,7 +5,6 @@ using UnityEngine;
 public class gridFollowBall : MonoBehaviour
 {
     public GameObject ball;
-    public bool zAxis;
     Transform ballTransform;
 
     void Start()
@@ -13,16 +12,9 @@ public class gridFollowBall : MonoBehaviour
         ballTransform = ball.transform;
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        //make new position the ball's position
-        if (zAxis)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y, ballTransform.position.z);
-        }
-        else
-        {
-            transform.position = new Vector3(ballTransform.position.x, transform.position.y, transform.position.z);
-        }
+        //follow the ball on the z axis
+        transform.position = new Vector3(transform.position.x, transform.position.y, ballTransform.position.z);
     }
 }

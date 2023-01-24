@@ -39,6 +39,8 @@ public class movement : MonoBehaviour
 
     public int[] counter = new int[2];
 
+    public GameController gameController;
+
     public cameraRotator rotateCameraScript;
 
     public int winner;
@@ -52,19 +54,12 @@ public class movement : MonoBehaviour
         rb = ball.GetComponent<Rigidbody>();
         ResetGame();
     }
+
     void FixedUpdate()
     {
         rb.velocity = move * speed * speedMultiplier;
-        //decide where the camera should be for a rotating camera
-        if (rb.velocity.z < 0)
-        {
-            rotateCameraScript.player1 = true;
-        }
-        else if (rb.velocity.z > 0)
-        {
-            rotateCameraScript.player1 = false;
-        }
     }
+
     void OnCollisionEnter(Collision collision)
     {
         switch (collision.gameObject.tag)
@@ -155,6 +150,23 @@ public class movement : MonoBehaviour
     {
         //score update here
         counter[player] += 1;
+        //check for winner
+        if (counter[0] == 3)
+        {
+            winner = 1;
+            ball.SetActive(false);
+            ScoreText.SetText($"" +
+        $"{"Winner".AddColor(Color.green)}");
+            gameController.EndGame();
+        }
+        else if (counter[1] == 3)
+        {
+            winner = 2;
+            ball.SetActive(false);
+            ScoreText.SetText($"" +
+        $"{"Winner".AddColor(Color.magenta)}");
+            gameController.EndGame();
+        }
         //update the text based on who has won
         if (winner == 0)
         {
@@ -188,6 +200,7 @@ public class movement : MonoBehaviour
         ball.SetActive(true);
         ResetMovement();
     }
+
     void ResetMovement()
     {
         //reset the movement of the ball

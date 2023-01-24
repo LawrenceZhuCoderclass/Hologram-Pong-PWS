@@ -43,155 +43,172 @@ public class GameController : MonoBehaviour
         switch (gameState)
         {
             case GameState.Start:
-                //During the Start screen
-                if (Input.GetKeyDown("space"))
-                {                   
-                    gameState = GameState.Playing;
-                    StartText.SetActive(false);
-                    Field.SetActive(true);
-                    SearchBall();
-                    movement.ResetGame();
-                    if(Invert_Axis == true)
-                    {
-                        //PlayerController_1.invertXAxis = true;
-                        //PlayerController_2.invertXAxis = true;
-                        PlayerController_1.XAxismultiplier = -1.0f;
-                        PlayerController_2.XAxismultiplier = -1.0f;
-                    }
-                    if (Piramid == true)
-                    {
-                        PlayerController_1.piramide = true;
-                        PlayerController_2.piramide = true;
-                        RotatingCam.SetActive(false);
-                        HologramCam.SetActive(true);
-                    }
-                    if (Controller == true)
-                    {
-                        PlayerController_1.controllerConnected = true;
-                        PlayerController_2.controllerConnected = true;
-                    }
-                    
-                }
-                else if (Input.GetKeyDown("o"))
-                {
-                    Select.Play();
-                    gameState = GameState.Options;
-                    StartText.SetActive(false);
-                    OptionsText.SetActive(true);
-                }
-                else if (Input.GetKeyDown("q"))
-                {
-                    Application.Quit();
-                }
+                gameStateStart();
                 break;
             
             case GameState.Options:
-                //During the options screen
-                if (Input.GetKeyDown("h"))
-                {
-                    Select.Play();
-                    Invert_Axis = true;
-                    mainCamera.transform.rotation = Quaternion.Euler(mainCamera.transform.eulerAngles.x, mainCamera.transform.eulerAngles.y, 90);
-                    Screen.SetResolution(720, 1334, true);
-                    //controls to that of the holofil
-                }
-                else if (Input.GetKeyDown("p"))
-                {
-                    Select.Play();
-                    Invert_Axis = true;
-                    Piramid = true;
-                    mainCamera.transform.rotation = Quaternion.Euler(mainCamera.transform.eulerAngles.x, mainCamera.transform.eulerAngles.y, 0);
-                    //controls to that of the pepper's cone
-                }
-                else if (Input.GetKeyDown("n"))
-                {
-                    Select.Play();
-                    Invert_Axis = false;
-                    Piramid = false;
-                    Controller = false;
-                    mainCamera.transform.rotation = Quaternion.Euler(mainCamera.transform.eulerAngles.x, mainCamera.transform.eulerAngles.y, 0);
-                    //return to the normal controls
-                }
-                else if (Input.GetKeyDown("c"))
-                {
-                    Select.Play();
-                    Controller = true;
-                }
-                else if (Input.GetKeyDown("e"))
-                {
-                    Select.Play();
-                    gameState = GameState.Start;
-                    OptionsText.SetActive(false);
-                    StartText.SetActive(true);
-                }
-                break; 
+                gameStateOptions();
+                break;
+
             case GameState.Playing:
-                //Things that can be done while playing
-                Time.timeScale = 1;
-                if (Input.GetKeyDown(KeyCode.Escape))
-                {
-                    gameState = GameState.Paused;
-                    Field.SetActive(false);
-                    PauseText.SetActive(true); 
-                }
-                //check for winner
-                if (movement.counter[0] == 3)
-                {
-                    movement.winner = 1;
-                    movement.ball.SetActive(false);
-                    movement.ScoreText.SetText($"" +
-                $"{"Winner".AddColor(Color.green)}");
-                    WinSound.Play();
-                    gameState = GameState.End;
-                }
-                else if (movement.counter[1] == 3)
-                {
-                    movement.winner = 2;
-                    movement.ball.SetActive(false);
-                    movement.ScoreText.SetText($"" +
-                $"{"Winner".AddColor(Color.magenta)}");
-                    WinSound.Play();
-                    gameState = GameState.End;
-                }
+                gameStatePlaying();
                 break;
             
             case GameState.Paused:
-                //During the pause screen
-                if (Input.GetKeyDown(KeyCode.Escape))
-                {
-                    //unpause game
-                    gameState = GameState.Playing;
-                    PauseText.SetActive(false);
-                    Field.SetActive(true);
-                    SearchBall();
-                }
-                if (Input.GetKeyDown("e"))
-                {
-                    //restart game
-                    gameState = GameState.Start;
-                    StartText.SetActive(true);
-                    Field.SetActive(false);
-                    PauseText.SetActive(false);
-                    movement.ResetGame();
-                }
+                gameStatePaused();
                 break;
             
             case GameState.End:
-                //restart game after game over
-                if (Input.GetKeyDown("space"))
-                {
-                    gameState = GameState.Playing;
-                    movement.ResetGame();
-                }
+                gameStateEnd();
                 break;
         }
     }
-    void SearchBall()
+
+    public void EndGame()
+    {
+        WinSound.Play();
+        gameState = GameState.End;
+    }
+
+    private void SearchBall()
     {
         ballObject = GameObject.FindWithTag("Ball");
         if (ballObject != null)
         {
             movement = ballObject.GetComponent<movement>();
         }        
+    }
+
+    private void gameStateStart()
+    {
+        //During the Start screen
+        if (Input.GetKeyDown("space"))
+        {
+            //start the game
+            gameState = GameState.Playing;
+            StartText.SetActive(false);
+            Field.SetActive(true);
+            SearchBall();
+            movement.ResetGame();
+            if (Invert_Axis == true)
+            {
+                //mirror the horizontal movement of the players if a hologram is used
+                PlayerController_1.XAxismultiplier = -1.0f;
+                PlayerController_2.XAxismultiplier = -1.0f;
+            }
+            if (Piramid == true)
+            {
+                PlayerController_1.piramide = true;
+                PlayerController_2.piramide = true;
+                //use the correct camera's
+                RotatingCam.SetActive(false);
+                HologramCam.SetActive(true);
+            }
+            if (Controller == true)
+            {
+                PlayerController_1.controllerConnected = true;
+                PlayerController_2.controllerConnected = true;
+            }
+
+        }
+        else if (Input.GetKeyDown("o"))
+        {
+            //switch to options menu
+            Select.Play();
+            gameState = GameState.Options;
+            StartText.SetActive(false);
+            OptionsText.SetActive(true);
+        }
+        else if (Input.GetKeyDown("q"))
+        {
+            //quit the game
+            Application.Quit();
+        }
+    }
+
+    private void gameStateOptions()
+    {
+        //During the options screen
+        if (Input.GetKeyDown("h"))
+        {
+            Select.Play();
+            Invert_Axis = true;
+            mainCamera.transform.rotation = Quaternion.Euler(mainCamera.transform.eulerAngles.x, mainCamera.transform.eulerAngles.y, 90);
+            Screen.SetResolution(720, 1334, true);
+            //controls to that of the holofil
+        }
+        else if (Input.GetKeyDown("p"))
+        {
+            Select.Play();
+            Invert_Axis = true;
+            Piramid = true;
+            mainCamera.transform.rotation = Quaternion.Euler(mainCamera.transform.eulerAngles.x, mainCamera.transform.eulerAngles.y, 0);
+            //controls to that of the pyramid
+        }
+        else if (Input.GetKeyDown("n"))
+        {
+            Select.Play();
+            Invert_Axis = false;
+            Piramid = false;
+            Controller = false;
+            mainCamera.transform.rotation = Quaternion.Euler(mainCamera.transform.eulerAngles.x, mainCamera.transform.eulerAngles.y, 0);
+            //return to the normal controls
+        }
+        else if (Input.GetKeyDown("c"))
+        {
+            Select.Play();
+            Controller = true;
+        }
+        else if (Input.GetKeyDown("e"))
+        {
+            Select.Play();
+            gameState = GameState.Start;
+            OptionsText.SetActive(false);
+            StartText.SetActive(true);
+        }
+    }
+
+    private void gameStatePlaying()
+    {
+        //Things that can be done while playing
+        Time.timeScale = 1;
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            gameState = GameState.Paused;
+            Field.SetActive(false);
+            PauseText.SetActive(true);
+        }
+    }
+
+    private void gameStatePaused()
+    {
+        //During the pause screen
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            //unpause game
+            gameState = GameState.Playing;
+            PauseText.SetActive(false);
+            Field.SetActive(true);
+            SearchBall();
+        }
+        if (Input.GetKeyDown("e"))
+        {
+            //restart game
+            gameState = GameState.Start;
+            StartText.SetActive(true);
+            Field.SetActive(false);
+            PauseText.SetActive(false);
+            movement.ResetGame();
+        }
+    }
+
+    private void gameStateEnd()
+    {
+        //restart game after game over
+        if (Input.GetKeyDown("space"))
+        {
+            gameState = GameState.Playing;
+            movement.ResetGame();
+        }
     }
 }
