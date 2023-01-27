@@ -20,22 +20,14 @@ public class movement : MonoBehaviour
     private float x;
     private float y;
     private float z;
-    private float xRot;
-    private float yRot;
-    private float zRot;
 
     private Vector3 move;
-
-    private Vector3 rotation;
 
     public GameObject ball;
     public GameObject player1;
     public GameObject player2;
 
     public TextMeshPro ScoreText;
-
-    public TextMeshProUGUI Scoretext_P1;
-    public TextMeshProUGUI ScoreText_P2;
 
     public int[] counter = new int[2];
 
@@ -67,12 +59,12 @@ public class movement : MonoBehaviour
             //player scored
             case ("scorewall_p1"):
                 Score.Play();
-                UpdateScore(Scoretext_P1, 1);
+                UpdateScore(1);
                 ResetMovement();
                 break;
             case ("scorewall_p2"):
                 Score.Play();
-                UpdateScore(ScoreText_P2, 0);
+                UpdateScore(0);
                 ResetMovement();
                 break;
             //bounce off wall
@@ -126,7 +118,7 @@ public class movement : MonoBehaviour
         }
     }
 
-    void UpdateScore(TextMeshProUGUI text, int player)
+    void UpdateScore(int player)
     {
         //score update here
         counter[player] += 1;
