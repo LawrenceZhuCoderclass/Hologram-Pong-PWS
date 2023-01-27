@@ -66,14 +66,14 @@ public class movement : MonoBehaviour
         {
             //player scored
             case ("scorewall_p1"):
+                Score.Play();
                 UpdateScore(Scoretext_P1, 1);
                 ResetMovement();
-                Score.Play();
                 break;
             case ("scorewall_p2"):
+                Score.Play();
                 UpdateScore(ScoreText_P2, 0);
                 ResetMovement();
-                Score.Play();
                 break;
             //bounce off wall
             case ("sidewall"):
@@ -86,26 +86,6 @@ public class movement : MonoBehaviour
                 move = new Vector3 (x, y, z);
                 Wall.Play();   
                 break;
-            //bounce off player
-            case ("Player_1"):
-                Bounce.Play();
-                z = z * -1.0f;
-                x = ((rb.position.x - player1.transform.position.x) + x) / 2;
-                y = ((rb.position.y - player1.transform.position.y) + y) / 2;
-                move = new Vector3(x, y, z);
-                speed = speed + 0.75f;
-                rotateCameraScript.player1 = false;
-                break;
-            case ("Player_2"):
-                Bounce.Play();
-                z = z * -1.0f;
-                x = ((rb.position.x - player2.transform.position.x) + x) / 2;
-                y = ((rb.position.y - player2.transform.position.y) + y) / 2;
-                move = new Vector3(x, y, z);
-                speed = speed + 0.75f;
-                rotateCameraScript.player1 = true;
-                break;
-            
             default:
                 z = z * -1.0f;
                 move = new Vector3 (x, y, z);
@@ -212,10 +192,12 @@ public class movement : MonoBehaviour
             if (Random.value > 0.5f)
             {
                 z = 1.0f;
+                rotateCameraScript.player1 = false;
             }
             else
             {
                 z = -1.0f;
+                rotateCameraScript.player1 = true;
             }
             move = new Vector3(x, y, z);
             speed = 3.0f;
