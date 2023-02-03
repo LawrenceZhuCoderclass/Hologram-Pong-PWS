@@ -95,6 +95,11 @@ public class GameController : MonoBehaviour
                 PlayerController_1.XAxismultiplier = -1.0f;
                 PlayerController_2.XAxismultiplier = -1.0f;
             }
+            else
+            {
+                PlayerController_1.XAxismultiplier = 1.0f;
+                PlayerController_2.XAxismultiplier = 1.0f;
+            }
             if (Piramid == true)
             {
                 PlayerController_1.piramide = true;
@@ -132,33 +137,22 @@ public class GameController : MonoBehaviour
         //During the options screen
         if (Input.GetKeyDown("h"))
         {
-            Select.Play();
-            Invert_Axis = true;
-            mainCamera.transform.rotation = Quaternion.Euler(mainCamera.transform.eulerAngles.x, mainCamera.transform.eulerAngles.y, 90);
-            Screen.SetResolution(720, 1334, true);
+            ChangeToHolofil();
             //controls to that of the holofil
         }
         else if (Input.GetKeyDown("p"))
         {
-            Select.Play();
-            Invert_Axis = true;
-            Piramid = true;
-            mainCamera.transform.rotation = Quaternion.Euler(mainCamera.transform.eulerAngles.x, mainCamera.transform.eulerAngles.y, 0);
+            ChangeToPyramid();
             //controls to that of the pyramid
         }
         else if (Input.GetKeyDown("n"))
         {
-            Select.Play();
-            Invert_Axis = false;
-            Piramid = false;
-            Controller = false;
-            mainCamera.transform.rotation = Quaternion.Euler(mainCamera.transform.eulerAngles.x, mainCamera.transform.eulerAngles.y, 0);
+            ChangeToNormal();
             //return to the normal controls
         }
         else if (Input.GetKeyDown("c"))
         {
-            Select.Play();
-            Controller = true;
+            ChangeToController();
             //when controllers are connected
         }
         else if (Input.GetKeyDown("e"))
@@ -170,6 +164,41 @@ public class GameController : MonoBehaviour
         }
     }
 
+    private void ChangeToHolofil()
+    {
+        Select.Play();
+        Invert_Axis = true;
+        Piramid = false;
+        mainCamera.transform.rotation = Quaternion.Euler(mainCamera.transform.eulerAngles.x, mainCamera.transform.eulerAngles.y, 90);
+        Screen.SetResolution(720, 1334, true);
+        RotatingCam.SetActive(true);
+        HologramCam.SetActive(false);
+    }
+    private void ChangeToPyramid()
+    {
+        Select.Play();
+        HologramCam.SetActive(true);
+        RotatingCam.SetActive(false);
+        Invert_Axis = true;
+        Piramid = true;
+        mainCamera.transform.rotation = Quaternion.Euler(mainCamera.transform.eulerAngles.x, mainCamera.transform.eulerAngles.y, 0);
+    }
+    private void ChangeToController()
+    {
+        Select.Play();
+        Controller = true;
+    }
+    private void ChangeToNormal()
+    {
+        Select.Play();
+        Piramid = false;
+        RotatingCam.SetActive(true);
+        HologramCam.SetActive(false);
+        Invert_Axis = false;
+        Piramid = false;
+        Controller = false;
+        mainCamera.transform.rotation = Quaternion.Euler(mainCamera.transform.eulerAngles.x, mainCamera.transform.eulerAngles.y, 0);
+    }
     //-----------------------------------------------------Function that is called when playing to check for inputs-----------------------------------------------------
     private void gameStatePlaying()
     {
@@ -216,4 +245,5 @@ public class GameController : MonoBehaviour
             movement.ResetGame();
         }
     }
+
 }
