@@ -5,8 +5,11 @@ using UnityEngine;
 public class Score : MonoBehaviour
 {
     private Rigidbody rb;
+
     private Vector3 eulerAngleVelocity;
+
     public GameController gameController;
+
     public cameraRotator cameraRotation;
 
     void Start()

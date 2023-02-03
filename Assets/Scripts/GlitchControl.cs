@@ -15,7 +15,6 @@ public class GlitchControl : MonoBehaviour
         hologramMaterial = GetComponent<Renderer>().material;
     }
 
-    // Start is called before the first frame update
     IEnumerator Start()
     {
         while (true)
@@ -30,7 +29,8 @@ public class GlitchControl : MonoBehaviour
                 {
                     hologramMaterial.SetFloat("_GlitchIntensity", Random.Range(0.07f, 0.1f));
                 }
-                else {
+                else
+                {
                     hologramMaterial.SetFloat("_GlitchIntensity", Random.Range(0.1f, 0.5f));
                 }
                 hologramMaterial.SetFloat("_GlowIntensity", originalGlowIntensity * Random.Range(0.14f, 0.44f));

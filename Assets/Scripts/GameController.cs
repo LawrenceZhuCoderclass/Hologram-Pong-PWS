@@ -78,10 +78,9 @@ public class GameController : MonoBehaviour
             movement = ballObject.GetComponent<movement>();
         }        
     }
-
+    //-----------------------------------------------------Start Screen function-----------------------------------------------------
     private void gameStateStart()
     {
-        //During the Start screen
         if (Input.GetKeyDown("space"))
         {
             //start the game
@@ -106,6 +105,7 @@ public class GameController : MonoBehaviour
             }
             if (Controller == true)
             {
+                //change controls when controllers are connected
                 PlayerController_1.controllerConnected = true;
                 PlayerController_2.controllerConnected = true;
             }
@@ -126,6 +126,7 @@ public class GameController : MonoBehaviour
         }
     }
 
+    //-----------------------------------------------------Options screen function-----------------------------------------------------
     private void gameStateOptions()
     {
         //During the options screen
@@ -158,6 +159,7 @@ public class GameController : MonoBehaviour
         {
             Select.Play();
             Controller = true;
+            //when controllers are connected
         }
         else if (Input.GetKeyDown("e"))
         {
@@ -168,6 +170,7 @@ public class GameController : MonoBehaviour
         }
     }
 
+    //-----------------------------------------------------Function that is called when playing to check for inputs-----------------------------------------------------
     private void gameStatePlaying()
     {
         //Things that can be done while playing
@@ -180,6 +183,7 @@ public class GameController : MonoBehaviour
         }
     }
 
+    //-----------------------------------------------------Pause screen function-----------------------------------------------------
     private void gameStatePaused()
     {
         //During the pause screen
@@ -202,6 +206,7 @@ public class GameController : MonoBehaviour
         }
     }
 
+//-----------------------------------------------------Function that is called to restart the game when someone wins-----------------------------------------------------
     private void gameStateEnd()
     {
         //restart game after game over

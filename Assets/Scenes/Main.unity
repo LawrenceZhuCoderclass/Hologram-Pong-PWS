@@ -3039,8 +3039,6 @@ MonoBehaviour:
   player1: {fileID: 1219713044}
   player2: {fileID: 1229934767}
   ScoreText: {fileID: 992021387}
-  Scoretext_P1: {fileID: 0}
-  ScoreText_P2: {fileID: 0}
   counter: 0000000000000000
   gameController: {fileID: 1280770850}
   rotateCameraScript: {fileID: 1571805952}
@@ -3884,13 +3882,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1203676755}
-  m_LocalRotation: {x: 0.27059793, y: 0.65328157, z: 0.65328157, w: -0.27059793}
-  m_LocalPosition: {x: 0, y: 20, z: 0.7}
+  m_LocalRotation: {x: -0.6532815, y: 0.27059805, z: 0.27059805, w: 0.6532815}
+  m_LocalPosition: {x: 0, y: 20, z: -0.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1296847069}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: -90, y: 225, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 45, z: 0}
 --- !u!64 &1203676757
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6977,13 +6975,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2062701214}
-  m_LocalRotation: {x: -0.6532815, y: 0.27059805, z: 0.27059805, w: 0.6532815}
-  m_LocalPosition: {x: 0, y: 20, z: -0.7}
+  m_LocalRotation: {x: 0.27059793, y: 0.65328157, z: 0.65328157, w: -0.27059793}
+  m_LocalPosition: {x: 0, y: 20, z: 0.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1296847069}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: -90, y: 45, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 225, z: 0}
 --- !u!64 &2062701216
 MeshCollider:
   m_ObjectHideFlags: 0
