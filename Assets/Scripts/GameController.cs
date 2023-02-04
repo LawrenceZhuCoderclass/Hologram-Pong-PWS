@@ -179,7 +179,7 @@ public class GameController : MonoBehaviour
             StartText.SetActive(true);
         }
     }
-
+    //-----------------------------------------------------Change the cameras when the Holofil is used-----------------------------------------------------
     private void ChangeToHolofil()
     {
         Select.Play();
@@ -190,6 +190,7 @@ public class GameController : MonoBehaviour
         RotatingCam.SetActive(true);
         HologramCam.SetActive(false);
     }
+    //-----------------------------------------------------Change the cameras when the Pyramid is used-----------------------------------------------------
     private void ChangeToPyramid()
     {
         Select.Play();
@@ -199,11 +200,13 @@ public class GameController : MonoBehaviour
         Piramid = true;
         mainCamera.transform.rotation = Quaternion.Euler(mainCamera.transform.eulerAngles.x, mainCamera.transform.eulerAngles.y, 0);
     }
+    //-----------------------------------------------------Change the controls when controllers are used-----------------------------------------------------
     private void ChangeToController()
     {
         Select.Play();
         Controller = true;
     }
+    //-----------------------------------------------------Change the variables to default settings-----------------------------------------------------
     private void ChangeToNormal()
     {
         Select.Play();

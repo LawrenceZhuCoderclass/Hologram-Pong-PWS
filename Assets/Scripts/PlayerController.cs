@@ -4,22 +4,24 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed;
+
     private Rigidbody rb;
+
     float moveHorizontal;
     float moveVertical;
-
-    private bool isPlayer_1 = false;
-    private bool isPlayer_2 = false;
-    public GameObject Player;
-    
-    //bools for using the correct settings
-    public bool controllerConnected;
-    public bool piramide;
+    public float speed;
     //used when projected as a hologram
     public float XAxismultiplier = 1.0f;
     //used when the player is player2
     private float player2MovementMultiplier = 1.0f;
+
+    //bools for using the correct settings
+    public bool controllerConnected;
+    public bool piramide;
+    private bool isPlayer_1 = false;
+    private bool isPlayer_2 = false;
+
+    public GameObject Player;
 
     //used for input settings
     private string XinputName;
@@ -29,10 +31,12 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         //checking which player the script is assigned to
-        if (Player.tag == "Player_1"){
+        if (Player.tag == "Player_1")
+        {
             isPlayer_1 = true;
         }
-        else if (Player.tag == "Player_2"){
+        else if (Player.tag == "Player_2")
+        {
             isPlayer_2 = true;
         }
 

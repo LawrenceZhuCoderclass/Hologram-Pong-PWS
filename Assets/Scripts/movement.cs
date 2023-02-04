@@ -117,10 +117,9 @@ public class movement : MonoBehaviour
                 break;
         }
     }
-
+    //-----------------------------------------------------Change the score when someone scores-----------------------------------------------------
     void UpdateScore(int player)
     {
-        //score update here
         counter[player] += 1;
         //check for winner
         if (counter[0] == 3)
@@ -158,7 +157,7 @@ public class movement : MonoBehaviour
                 $"{"Winner".AddColor(Color.magenta)}");
         }
     }
-
+    //-----------------------------------------------------Reset the score to 0-0 and the position of the players to restart the game-----------------------------------------------------
     public void ResetGame()
     {
         //reset the score count and the winner
@@ -172,7 +171,7 @@ public class movement : MonoBehaviour
         ball.SetActive(true);
         ResetMovement();
     }
-
+    //-----------------------------------------------------Reset the position of the ball to its original positions-----------------------------------------------------
     void ResetMovement()
     {
         //reset the movement of the ball
