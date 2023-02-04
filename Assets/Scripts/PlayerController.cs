@@ -9,16 +9,17 @@ public class PlayerController : MonoBehaviour
     float moveHorizontal;
     float moveVertical;
 
-    private bool Player_1 = false;
-    private bool Player_2 = false;
+    private bool isPlayer_1 = false;
+    private bool isPlayer_2 = false;
     public GameObject Player;
     
+    //bools for using the correct settings
     public bool controllerConnected;
-    //used when projected in hologram;
-    public float XAxismultiplier = 1.0f;
-    //used when the player is 2
-    private float player2MovementMultiplier = 1.0f;
     public bool piramide;
+    //used when projected as a hologram
+    public float XAxismultiplier = 1.0f;
+    //used when the player is player2
+    private float player2MovementMultiplier = 1.0f;
 
     //used for input settings
     private string XinputName;
@@ -29,14 +30,14 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         //checking which player the script is assigned to
         if (Player.tag == "Player_1"){
-            Player_1 = true;
+            isPlayer_1 = true;
         }
         else if (Player.tag == "Player_2"){
-            Player_2 = true;
+            isPlayer_2 = true;
         }
 
         //checking which settings are true for the movement input
-        if (Player_1)
+        if (isPlayer_1)
         {
             if (controllerConnected && !piramide)
             {
@@ -59,7 +60,7 @@ public class PlayerController : MonoBehaviour
                 YinputName = "P1VerticalKP";
             }
         }
-        else if (Player_2)
+        else if (isPlayer_2)
         {
             player2MovementMultiplier = -1;
             if (controllerConnected && !piramide)
@@ -92,11 +93,63 @@ public class PlayerController : MonoBehaviour
         boundaries.x = Mathf.Clamp(boundaries.x, -3.36f, 3.36f);
         boundaries.y = Mathf.Clamp(boundaries.y, -1.86f, 1.86f);
         transform.position = boundaries;
+        //when reflected in screen the horizontal movement is flipped
+        moveHorizontal = XAxismultiplier * Input.GetAxis(XinputName);
+        moveVertical = Input.GetAxis(YinputName);
         //updating player movement
-            //when reflected in screen the horizontal movement is flipped
-            moveHorizontal = XAxismultiplier * Input.GetAxis(XinputName);
-            moveVertical = Input.GetAxis(YinputName);
-            Vector3 move = new Vector3(player2MovementMultiplier * moveHorizontal, moveVertical, 0.0f);
-            rb.velocity = move * speed;
+        Vector3 move = new Vector3(player2MovementMultiplier * moveHorizontal, moveVertical, 0.0f);
+        rb.velocity = move * speed;
+    }
+
+    public void StartGame()
+    {
+        //checking which settings are true for the movement input
+        if (isPlayer_1)
+        {
+            if (controllerConnected && !piramide)
+            {
+                XinputName = "MoveHorizontalP1";
+                YinputName = "MoveVerticalP1";
+            }
+            else if (controllerConnected && piramide)
+            {
+                XinputName = "P1HorizontalCoP";
+                YinputName = "P1VerticalCoP";
+            }
+            else if (!controllerConnected && !piramide)
+            {
+                XinputName = "P1Horizontal";
+                YinputName = "P1Vertical";
+            }
+            else if (!controllerConnected && piramide)
+            {
+                XinputName = "P1HorizontalKP";
+                YinputName = "P1VerticalKP";
+            }
+        }
+        else if (isPlayer_2)
+        {
+            player2MovementMultiplier = -1;
+            if (controllerConnected && !piramide)
+            {
+                XinputName = "MoveHorizontalP2";
+                YinputName = "MoveVerticalP2";
+            }
+            else if (controllerConnected && piramide)
+            {
+                XinputName = "P2HorizontalCoP";
+                YinputName = "P2VerticalCoP";
+            }
+            else if (!controllerConnected && !piramide)
+            {
+                XinputName = "P2Horizontal";
+                YinputName = "P2Vertical";
+            }
+            else if (!controllerConnected && piramide)
+            {
+                XinputName = "P2HorizontalKP";
+                YinputName = "P2VerticalKP";
+            }
+        }
     }
 }

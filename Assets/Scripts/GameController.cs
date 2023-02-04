@@ -108,12 +108,28 @@ public class GameController : MonoBehaviour
                 RotatingCam.SetActive(false);
                 HologramCam.SetActive(true);
             }
+            else
+            {
+                PlayerController_1.piramide = false;
+                PlayerController_2.piramide = false;
+                //use the correct camera's
+                RotatingCam.SetActive(true);
+                HologramCam.SetActive(false);
+            }
             if (Controller == true)
             {
                 //change controls when controllers are connected
                 PlayerController_1.controllerConnected = true;
                 PlayerController_2.controllerConnected = true;
             }
+            else
+            {
+                //change controls when controllers are connected
+                PlayerController_1.controllerConnected = false;
+                PlayerController_2.controllerConnected = false;
+            }
+            PlayerController_1.StartGame();
+            PlayerController_2.StartGame();
 
         }
         else if (Input.GetKeyDown("o"))

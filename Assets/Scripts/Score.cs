@@ -20,7 +20,7 @@ public class Score : MonoBehaviour
 
     void FixedUpdate()
     {
-        //rotate the score
+        //rotate the score based on the current settings
         if (gameController.Piramid)
         {
             Quaternion deltaRotation = Quaternion.Euler(eulerAngleVelocity * Time.fixedDeltaTime);
